@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">密码储存器</string>
+    <string name="username">用户名:</string>
+    <string name="enterUsername">输入用户名</string>
+    <string name="password">密码:</string>
+    <string name="enterPassword">输入密码</string>
+    <string name="login">登录</string>
+    <string name="register">注册</string>
+    <string name="birth">生日</string>
+    <string name="birthDay">输入生日</string>
+    <string name="error1">Please enter info</string>
+</resources>
