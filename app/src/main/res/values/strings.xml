@@ -8,5 +8,12 @@
     <string name="register">register</string>
     <string name="birth">birthday</string>
     <string name="birthDay">enter your birthday here</string>
+    <string name="addPassword">click to add password</string>
+    <string name="checkInfo">click here to check info</string>
     <string name="error1">Please enter info</string>
+    <string name="error2">Exist username, change it.</string>
+    <string name="error3">Wrong info</string>
+    <string name="success1">Register complete! Go to Login</string>
+    <string name="success2">Login successfully</string>
+    <string name="info1">Welcome back </string>
 </resources>
