@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class StartPage extends AppCompatActivity {
@@ -23,6 +24,13 @@ public class StartPage extends AppCompatActivity {
         TextView showUser=(TextView)findViewById(R.id.showUser);
         showUser.setText(getResources().getString(R.string.info1)+" "+userFrom);
         showUser.setTextColor(Color.RED);
-
+        Button add,show;
+        add=(Button) findViewById(R.id.addPassword);
+        if(add!=null){
+            add.setOnClickListener(click->{
+                Intent gotoAdd=new Intent(this,InfoEnter.class);
+                startActivityForResult(gotoAdd,30);
+            });
+        }
     }
 }
