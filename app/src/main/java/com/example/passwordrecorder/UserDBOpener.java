@@ -12,9 +12,11 @@ public class UserDBOpener extends SQLiteOpenHelper {
     public final static String Table_Name="InfoTable";
     public final static String COL_User="username";
     public final static String COL_Pass="password";
+    public final static String COL_SEC="securityPhone";
+    public final static String COL_Website="website";
     public final static String COL_ID="_ID";
     public final String DB_Run="create table "+Table_Name+"("+
-            COL_ID+" integer PRIMARY KEY AUTOINCREMENT, "+COL_User+" TEXT, "+COL_Pass+" TEXT)";
+            COL_ID+" integer PRIMARY KEY AUTOINCREMENT, "+COL_User+" TEXT, "+COL_Pass+" TEXT, "+COL_SEC+" TEXT, "+COL_Website+" TEXT)";
 
     public UserDBOpener(Context cnt) {
         super(cnt, DB_Name, null, V);

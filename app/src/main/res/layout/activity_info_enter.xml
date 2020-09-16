@@ -45,5 +45,27 @@
         android:entries="@array/website"
         android:spinnerMode="dialog"
         android:prompt="@string/registerInfo"
+        android:textAlignment="center"
+
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/securityPhone"
+        android:textColor="@android:color/holo_orange_dark"
+        android:textSize="15sp"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enterSecurity"
+        android:id="@+id/phoneEnter"
+        android:inputType="text"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/addBtn"
+        android:id="@+id/addBtn"
+        android:textColor="@android:color/holo_green_dark"
         />
 </LinearLayout>

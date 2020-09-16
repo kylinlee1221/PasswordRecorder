@@ -12,12 +12,23 @@
     <string name="addPassword">添加账户信息</string>
     <string name="checkInfo">查看已存储的信息</string>
     <string name="registerInfo">注册地</string>
+    <string name="securityPhone">输入注册时的手机号</string>
+    <string name="enterSecurity">Enter phone number here</string>
+    <string name="addBtn">添加</string>
     <string name="error1">信息不能为空</string>
     <string name="error2">用户名已存在</string>
     <string name="error3">用户名或密码错误</string>
     <string name="success1">注册成功! 去登录</string>
     <string name="success2">登录成功</string>
     <string name="info1">欢迎回来 </string>
+    <string name="info2">The info you enter is:</string>
+    <string name="infoUser">Username:</string>
+    <string name="infoPwd">Password:</string>
+    <string name="infoWeb">Website:</string>
+    <string name="infoSecurity">Security phone</string>
+    <string name="yesBtn">Yes</string>
+    <string name="noBtn">no</string>
+    <string name="BackToFront">Click here back to front</string>
     <string-array name="website">
         <item>Google</item>
         <item>Facebook</item>
