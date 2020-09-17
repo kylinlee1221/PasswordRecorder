@@ -77,9 +77,13 @@ public class MainActivity extends AppCompatActivity {
         username=shared.getString("username","");
 
         loginBtn.setOnClickListener(click->{
-            Intent intent=new Intent(this,StartPage.class);
-            intent.putExtra("typeUsername",userEdit.getText().toString());
-            startActivityForResult(intent,30);
+            if(!userEdit.getText().toString().equals("")) {
+                Intent intent = new Intent(this, StartPage.class);
+                intent.putExtra("typeUsername", userEdit.getText().toString());
+                startActivityForResult(intent, 30);
+            }else {
+                Toast.makeText(this,getResources().getString(R.string.error1),Toast.LENGTH_LONG).show();
+            }
         });
     }
     @Override

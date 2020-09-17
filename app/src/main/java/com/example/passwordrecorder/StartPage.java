@@ -26,10 +26,17 @@ public class StartPage extends AppCompatActivity {
         showUser.setTextColor(Color.RED);
         Button add,show;
         add=(Button) findViewById(R.id.addPassword);
+        show=(Button)findViewById(R.id.checkInfo);
         if(add!=null){
             add.setOnClickListener(click->{
                 Intent gotoAdd=new Intent(this,InfoEnter.class);
                 startActivityForResult(gotoAdd,30);
+            });
+        }
+        if(show!=null){
+            show.setOnClickListener(click->{
+                Intent gotoShow=new Intent(this,Info.class);
+                startActivityForResult(gotoShow,30);
             });
         }
     }

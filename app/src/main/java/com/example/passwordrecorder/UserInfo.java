@@ -50,4 +50,7 @@ public class UserInfo {
     public void setSecPhone(String secPhone) {
         this.secPhone = secPhone;
     }
+    public String getInfo(){
+        return "username:"+username+"\nPassword:"+password+"\nwebsite:"+website+"\nsecurity:"+secPhone;
+    }
 }
