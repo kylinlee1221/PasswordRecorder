@@ -73,9 +73,8 @@ public class InfoEnter extends AppCompatActivity {
                             websiteSelect[0]=list[position]+":"+websiteET.getText().toString();
                         }
                     });
-                }
-                if(websiteET.getVisibility()==View.VISIBLE){
-                    websiteSelect[0]=websiteET.getText().toString().trim();
+                }else{
+                    websiteET.setVisibility(View.INVISIBLE);
                 }
             }
 
