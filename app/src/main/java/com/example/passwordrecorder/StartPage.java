@@ -20,7 +20,7 @@ public class StartPage extends AppCompatActivity {
         String userFrom=fromMain.getStringExtra("typeUsername");
         //SharedPreferences shared=getSharedPreferences("username",MODE_PRIVATE);
         //userFrom=shared.getString("username","");
-        Log.i("username",userFrom);
+        //Log.i("username",userFrom);
         TextView showUser=(TextView)findViewById(R.id.showUser);
         showUser.setText(getResources().getString(R.string.info1)+" "+userFrom);
         showUser.setTextColor(Color.RED);

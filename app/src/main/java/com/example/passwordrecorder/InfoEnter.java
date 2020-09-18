@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,6 +15,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,13 +31,15 @@ public class InfoEnter extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_enter);
         Spinner website=(Spinner)findViewById(R.id.registerWeb);
-        EditText usernameET,passwordET,securityET;
+        EditText usernameET,passwordET,securityET,websiteET;
         Button addBtn;
+        final Boolean[] flag = {false};
         String usName,pwdET,secET;
         usernameET=(EditText)findViewById(R.id.usernameEnter);
         passwordET=(EditText)findViewById(R.id.passwordEnter);
         securityET=(EditText)findViewById(R.id.phoneEnter);
         addBtn=(Button)findViewById(R.id.addBtn);
+        websiteET=findViewById(R.id.webEnter);
         usName=usernameET.getText().toString();
         pwdET=passwordET.getText().toString();
         secET=securityET.getText().toString();
@@ -48,6 +54,29 @@ public class InfoEnter extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //Toast.makeText(InfoEnter.this,"The website you chose is "+list[position],Toast.LENGTH_LONG).show();
                 websiteSelect[0] =list[position];
+                if(list[position].equals("other")){
+                    websiteET.setVisibility(View.VISIBLE);
+                    //websiteET.setInputType(View.TEXT_ALIGNMENT_CENTER);
+                    websiteET.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                        }
+
+                        @Override
+                        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                        }
+
+                        @Override
+                        public void afterTextChanged(Editable s) {
+                            websiteSelect[0]=list[position]+":"+websiteET.getText().toString();
+                        }
+                    });
+                }
+                if(websiteET.getVisibility()==View.VISIBLE){
+                    websiteSelect[0]=websiteET.getText().toString().trim();
+                }
             }
 
             @Override
@@ -69,7 +98,11 @@ public class InfoEnter extends AppCompatActivity {
                                     go.putExtra("username",usernameET.getText().toString());
                                     go.putExtra("password",passwordET.getText().toString());
                                     go.putExtra("secPhone",securityET.getText().toString());
-                                    go.putExtra("website",websiteSelect[0]);
+                                    if(!flag[0]) {
+                                        go.putExtra("website", websiteSelect[0]);
+                                    }else{
+                                        go.putExtra("website",websiteET.getText().toString());
+                                    }
                                     startActivityForResult(go,30);
                                 }
                             }).setNegativeButton(getResources().getText(R.string.noBtn), new DialogInterface.OnClickListener() {

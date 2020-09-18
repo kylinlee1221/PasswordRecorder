@@ -48,6 +48,13 @@
         android:textAlignment="center"
 
         />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:id="@+id/webEnter"
+        android:inputType="text"
+        />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
