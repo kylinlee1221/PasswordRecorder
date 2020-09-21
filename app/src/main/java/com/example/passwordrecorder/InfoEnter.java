@@ -116,6 +116,11 @@ public class InfoEnter extends AppCompatActivity {
             });
         }
     }
+    @Override
+    protected void onPause() {
+        finish();
+        super.onPause();
+    }
     private void initDatas(){
         //list=new ArrayList<String>();
         /*<item>Google</item>

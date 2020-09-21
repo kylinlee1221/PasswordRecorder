@@ -1,5 +1,6 @@
 package com.example.passwordrecorder;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -70,29 +71,33 @@ public class MainActivity extends AppCompatActivity {
         });*/
         String username;
         Button loginBtn;
-        EditText userEdit=(EditText)findViewById(R.id.username);
-        loginBtn=(Button)findViewById(R.id.login);
+        EditText userEdit = (EditText) findViewById(R.id.username);
+        loginBtn = (Button) findViewById(R.id.login);
         //username=userEdit.getText().toString();
-        SharedPreferences shared=getSharedPreferences("username",MODE_PRIVATE);
-        username=shared.getString("username","");
+        SharedPreferences shared = getSharedPreferences("username", MODE_PRIVATE);
+        username = shared.getString("username", "");
 
-        loginBtn.setOnClickListener(click->{
-            if(!userEdit.getText().toString().equals("")) {
+        loginBtn.setOnClickListener(click -> {
+            if (!userEdit.getText().toString().equals("")) {
                 Intent intent = new Intent(this, StartPage.class);
                 intent.putExtra("typeUsername", userEdit.getText().toString());
                 startActivityForResult(intent, 30);
-            }else {
-                Toast.makeText(this,getResources().getString(R.string.error1),Toast.LENGTH_LONG).show();
+                finish();
+            } else {
+                Toast.makeText(this, getResources().getString(R.string.error1), Toast.LENGTH_LONG).show();
             }
         });
+
     }
+
     @Override
-    protected void onPause(){
+    protected void onPause() {
         super.onPause();
-        EditText userIn=(EditText)findViewById(R.id.username);
-        SharedPreferences shared=getSharedPreferences("username",MODE_PRIVATE);
-        SharedPreferences.Editor editor=shared.edit();
-        editor.putString("UserName",userIn.getText().toString());
+        EditText userIn = (EditText) findViewById(R.id.username);
+        SharedPreferences shared = getSharedPreferences("username", MODE_PRIVATE);
+        SharedPreferences.Editor editor = shared.edit();
+        editor.putString("UserName", userIn.getText().toString());
         editor.commit();
     }
+
 }

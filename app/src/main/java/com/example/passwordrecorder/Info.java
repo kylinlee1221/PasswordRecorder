@@ -111,4 +111,9 @@ public class Info extends AppCompatActivity {
             return rowView;
         }
     }
+    @Override
+    protected void onPause() {
+        finish();
+        super.onPause();
+    }
 }

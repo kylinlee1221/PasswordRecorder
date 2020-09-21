@@ -21,6 +21,7 @@
     <string name="success2">Login successfully</string>
     <string name="info1">Welcome back </string>
     <string name="info2">The info you enter is:</string>
+    <string name="exit1">Press another back to exit</string>
     <string name="infoUser">Username:</string>
     <string name="infoPwd">Password:</string>
     <string name="infoWeb">Website:</string>
