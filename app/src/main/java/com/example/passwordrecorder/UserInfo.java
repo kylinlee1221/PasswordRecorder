@@ -53,4 +53,7 @@ public class UserInfo {
     public String getInfo(){
         return "username:"+username+"\nPassword:"+password+"\nwebsite:"+website+"\nsecurity:"+secPhone;
     }
+    public String getInfoCN(){
+        return "用户名:"+username+"\n密码:"+password+"\n注册地:"+website+"\n安全手机:"+secPhone;
+    }
 }

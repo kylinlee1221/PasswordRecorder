@@ -13,7 +13,7 @@
     <string name="checkInfo">查看已存储的信息</string>
     <string name="registerInfo">注册地</string>
     <string name="securityPhone">输入注册时的手机号</string>
-    <string name="enterSecurity">Enter phone number here</string>
+    <string name="enterSecurity">再此输入手机号</string>
     <string name="addBtn">添加</string>
     <string name="error1">信息不能为空</string>
     <string name="error2">用户名已存在</string>
@@ -24,10 +24,10 @@
     <string name="info2">The info you enter is:</string>
     <string name="info3">确认删除?</string>
     <string name="exit1">再按一次退出</string>
-    <string name="infoUser">Username:</string>
-    <string name="infoPwd">Password:</string>
-    <string name="infoWeb">Website:</string>
-    <string name="infoSecurity">Security phone</string>
+    <string name="infoUser">用户名:</string>
+    <string name="infoPwd">密码:</string>
+    <string name="infoWeb">注册地:</string>
+    <string name="infoSecurity">安全手机:</string>
     <string name="yesBtn">是</string>
     <string name="noBtn">否</string>
     <string name="BackToFront">返回首页</string>

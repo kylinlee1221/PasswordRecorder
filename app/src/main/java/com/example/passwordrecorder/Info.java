@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Info extends AppCompatActivity {
     ArrayList<UserInfo> infoList=new ArrayList<>();
@@ -57,7 +59,7 @@ public class Info extends AppCompatActivity {
 
         }
         //assert username != null;
-        if (username != null) {
+        if (username != null&&password!=null&&secPhone!=null&&website!=null) {
             adapter = new MyAdapter();
             myList.setAdapter(adapter);
             myList.setSelection(adapter.getCount() - 1);
@@ -88,7 +90,11 @@ public class Info extends AppCompatActivity {
             builder.setTitle(getResources().getString(R.string.info3)).setPositiveButton(getResources().getString(R.string.yesBtn),(click,arg)->{
                 deleteInfo(info1);
                 infoList.remove(pos);
+                //adapter=new MyAdapter();
                 adapter.notifyDataSetChanged();
+                Intent intent=new Intent(Info.this,Info.class);
+                startActivity(intent);
+                finish();
             }).setNegativeButton(getResources().getString(R.string.noBtn),(click,arg)->{}).create().show();
             return true;
         });
@@ -124,7 +130,15 @@ public class Info extends AppCompatActivity {
             ImageView opt = rowView.findViewById(R.id.img);
             opt.setImageResource(R.drawable.lyric);
             //rowMessage.setText(thisRow.getLyric());
-            rowMessage.setText((thisRow.getInfo()));
+            Locale locale=getResources().getConfiguration().locale;
+            String lang=locale.getLanguage();
+            //Log.e("Lang",lang);
+            /*if(lang.equals("zh")){
+                rowMessage.setText((thisRow.getInfoCN()));
+            }else {
+                rowMessage.setText((thisRow.getInfo()));
+            }*/
+            rowMessage.setText(getResources().getString(R.string.infoUser)+thisRow.getUsername()+"\n"+getResources().getString(R.string.infoPwd)+thisRow.getPassword()+"\n"+getResources().getString(R.string.infoWeb)+thisRow.getWebsite()+"\n"+getResources().getString(R.string.infoSecurity)+thisRow.getSecPhone());
             return rowView;
         }
     }
