@@ -1,5 +1,6 @@
 package com.example.passwordrecorder;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
@@ -7,6 +8,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,9 +77,24 @@ public class Info extends AppCompatActivity {
         if(goBack!=null){
             goBack.setOnClickListener(click->{
                 Intent back=new Intent(this,StartPage.class);
-                startActivityForResult(back,30);
+                //startActivityForResult(back,30);
+                startActivity(back);
+                finish();
             });
         }
+        myList.setOnItemLongClickListener((p,b,pos,id)->{
+            AlertDialog.Builder builder=new AlertDialog.Builder(this);
+            UserInfo info1=infoList.get(pos);
+            builder.setTitle(getResources().getString(R.string.info3)).setPositiveButton(getResources().getString(R.string.yesBtn),(click,arg)->{
+                deleteInfo(info1);
+                infoList.remove(pos);
+                adapter.notifyDataSetChanged();
+            }).setNegativeButton(getResources().getString(R.string.noBtn),(click,arg)->{}).create().show();
+            return true;
+        });
+    }
+    private void deleteInfo(UserInfo info){
+        db.delete(UserDBOpener.Table_Name,UserDBOpener.COL_ID+"=?",new String[]{Long.toString(info.getUserId())});
     }
     protected class MyAdapter extends BaseAdapter {
 
@@ -115,5 +132,23 @@ public class Info extends AppCompatActivity {
     protected void onPause() {
         finish();
         super.onPause();
+    }
+    /*@Override
+    public boolean onKeyDown(int keyCode, KeyEvent event){
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }*/
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event){
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            Intent intent=new Intent(Info.this,StartPage.class);
+            startActivity(intent);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

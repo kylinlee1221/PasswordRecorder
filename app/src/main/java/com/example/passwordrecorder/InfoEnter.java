@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -102,7 +103,9 @@ public class InfoEnter extends AppCompatActivity {
                                     }else{
                                         go.putExtra("website",websiteET.getText().toString());
                                     }
-                                    startActivityForResult(go,30);
+                                    //startActivityForResult(go,30);
+                                    startActivity(go);
+                                    finish();
                                 }
                             }).setNegativeButton(getResources().getText(R.string.noBtn), new DialogInterface.OnClickListener() {
                         @Override
@@ -115,6 +118,16 @@ public class InfoEnter extends AppCompatActivity {
                 }
             });
         }
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event){
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            Intent intent=new Intent(InfoEnter.this,StartPage.class);
+            startActivity(intent);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
     @Override
     protected void onPause() {

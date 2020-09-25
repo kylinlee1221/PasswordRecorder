@@ -22,14 +22,15 @@
     <string name="success2">登录成功</string>
     <string name="info1">欢迎回来 </string>
     <string name="info2">The info you enter is:</string>
+    <string name="info3">确认删除?</string>
     <string name="exit1">再按一次退出</string>
     <string name="infoUser">Username:</string>
     <string name="infoPwd">Password:</string>
     <string name="infoWeb">Website:</string>
     <string name="infoSecurity">Security phone</string>
-    <string name="yesBtn">Yes</string>
-    <string name="noBtn">no</string>
-    <string name="BackToFront">Click here back to front</string>
+    <string name="yesBtn">是</string>
+    <string name="noBtn">否</string>
+    <string name="BackToFront">返回首页</string>
     <string-array name="website">
         <item>Google</item>
         <item>Facebook</item>

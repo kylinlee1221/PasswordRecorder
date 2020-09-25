@@ -27,7 +27,7 @@ public class StartPage extends AppCompatActivity {
         SharedPreferences shared=getSharedPreferences("username",MODE_PRIVATE);
         SharedPreferences.Editor editor = shared.edit();
         if(userFrom!=null) {
-            editor.putString("UserName", userFrom);
+            editor.putString("username", userFrom);
             editor.apply();
         }
         //userFrom=shared.getString("username","");
@@ -48,13 +48,17 @@ public class StartPage extends AppCompatActivity {
         if(add!=null){
             add.setOnClickListener(click->{
                 Intent gotoAdd=new Intent(this,InfoEnter.class);
-                startActivityForResult(gotoAdd,30);
+                //startActivityForResult(gotoAdd,30);
+                startActivity(gotoAdd);
+                finish();
             });
         }
         if(show!=null){
             show.setOnClickListener(click->{
                 Intent gotoShow=new Intent(this,Info.class);
-                startActivityForResult(gotoShow,30);
+                //startActivityForResult(gotoShow,30);
+                startActivity(gotoShow);
+                finish();
             });
         }
     }
@@ -83,9 +87,10 @@ public class StartPage extends AppCompatActivity {
         SharedPreferences shared = getSharedPreferences("username", MODE_PRIVATE);
         SharedPreferences.Editor editor = shared.edit();
         if(userFrom!=null) {
-            editor.putString("UserName", userFrom);
+            editor.putString("username", userFrom);
             editor.apply();
         }
+        //finish();
         super.onPause();
     }
 }

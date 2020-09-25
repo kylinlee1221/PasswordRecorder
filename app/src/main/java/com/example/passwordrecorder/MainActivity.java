@@ -81,7 +81,8 @@ public class MainActivity extends AppCompatActivity {
             if (!userEdit.getText().toString().equals("")) {
                 Intent intent = new Intent(this, StartPage.class);
                 intent.putExtra("typeUsername", userEdit.getText().toString());
-                startActivityForResult(intent, 30);
+                //startActivityForResult(intent, 30);
+                startActivity(intent);
                 finish();
             } else {
                 Toast.makeText(this, getResources().getString(R.string.error1), Toast.LENGTH_LONG).show();
