@@ -7,7 +7,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast; 
@@ -72,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
         String username;
         Button loginBtn;
         EditText userEdit = (EditText) findViewById(R.id.username);
+        EditText passEdit=(EditText)findViewById(R.id.password);
         loginBtn = (Button) findViewById(R.id.login);
         //username=userEdit.getText().toString();
         SharedPreferences shared = getSharedPreferences("username", MODE_PRIVATE);
@@ -88,7 +94,43 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, getResources().getString(R.string.error1), Toast.LENGTH_LONG).show();
             }
         });
+        final Drawable[] drawables=passEdit.getCompoundDrawables();
+        final int eyeWidth=drawables[2].getBounds().width();
+        final Drawable EyeOpen=getResources().getDrawable(R.drawable.open);
+        final boolean[] isHide = {true};
+        EyeOpen.setBounds(drawables[2].getBounds());
+        passEdit.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction()==MotionEvent.ACTION_UP){
+                    float et_pwdMinX = v.getWidth() - eyeWidth - passEdit.getPaddingRight();
+                    float et_pwdMaxX = v.getWidth();
+                    float et_pwdMinY = 0;
+                    float et_pwdMaxY = v.getHeight();
+                    float x = event.getX();
+                    float y = event.getY();
 
+                    if (x < et_pwdMaxX && x > et_pwdMinX && y > et_pwdMinY && y < et_pwdMaxY) {
+                        // 点击了眼睛图标的位置
+                        isHide[0] = !isHide[0];
+                        if (isHide[0]) {
+                            passEdit.setCompoundDrawables(null,
+                                    null,
+                                    drawables[2], null);
+
+                            passEdit.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                        } else {
+                            passEdit.setCompoundDrawables(null, null,
+                                    EyeOpen,
+                                    null);
+                            passEdit.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                        }
+                    }
+                }
+                return false;
+            }
+            //return false;
+        });
     }
 
     @Override

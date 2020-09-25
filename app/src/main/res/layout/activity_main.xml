@@ -42,6 +42,8 @@
         android:id="@+id/password"
         android:hint="@string/enterPassword"
         android:inputType="textPassword"
+        android:drawableRight="@drawable/close"
+        android:paddingRight="10dp"
         />
     <Button
         android:layout_width="match_parent"

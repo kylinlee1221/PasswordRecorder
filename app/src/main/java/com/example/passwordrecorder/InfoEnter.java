@@ -3,12 +3,17 @@ package com.example.passwordrecorder;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,6 +32,7 @@ public class InfoEnter extends AppCompatActivity {
     String[] list;
     //ArrayAdapter<String> adapter;
     //private List<String> list;
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,6 +124,43 @@ public class InfoEnter extends AppCompatActivity {
                 }
             });
         }
+        final Drawable[] drawables=passwordET.getCompoundDrawables();
+        final int eyeWidth=drawables[2].getBounds().width();
+        final Drawable EyeOpen=getResources().getDrawable(R.drawable.open);
+        final boolean[] isHide = {true};
+        EyeOpen.setBounds(drawables[2].getBounds());
+        passwordET.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction()==MotionEvent.ACTION_UP){
+                    float et_pwdMinX = v.getWidth() - eyeWidth - passwordET.getPaddingRight();
+                    float et_pwdMaxX = v.getWidth();
+                    float et_pwdMinY = 0;
+                    float et_pwdMaxY = v.getHeight();
+                    float x = event.getX();
+                    float y = event.getY();
+
+                    if (x < et_pwdMaxX && x > et_pwdMinX && y > et_pwdMinY && y < et_pwdMaxY) {
+                        // 点击了眼睛图标的位置
+                        isHide[0] = !isHide[0];
+                        if (isHide[0]) {
+                            passwordET.setCompoundDrawables(null,
+                                    null,
+                                    drawables[2], null);
+
+                            passwordET.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                        } else {
+                            passwordET.setCompoundDrawables(null, null,
+                                    EyeOpen,
+                                    null);
+                            passwordET.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                        }
+                    }
+                }
+                return false;
+                }
+                //return false;
+            });
     }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event){
