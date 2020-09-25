@@ -15,7 +15,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast; 
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     SQLiteDatabase db;
@@ -24,72 +26,44 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /*UserDBOpener opener=new UserDBOpener(this);
-        db=opener.getWritableDatabase();
-        String[] cols={opener.COL_ID,opener.COL_User,opener.COL_Pass};
-        Cursor results=db.query(false,opener.Table_Name,cols,null,null,null,null,null,null);
-
-        Button loginButton,registerButton;
-        EditText password,username;
-        registerButton=(Button)findViewById(R.id.register);
-        loginButton=(Button)findViewById(R.id.login);
-        username=(EditText)findViewById(R.id.username);
-        password=(EditText)findViewById(R.id.password);
-        int UserIDX=results.getColumnIndex(opener.COL_User);
-        int idX=results.getColumnIndex(opener.COL_ID);
-        int passIDX=results.getColumnIndex(opener.COL_Pass);
-        Intent fromLast=getIntent();
-        String userFromLast=fromLast.getStringExtra("UserName");
-        registerButton.setOnClickListener(click->{
-            Intent toRegister=new Intent(MainActivity.this,Register.class);
-            startActivityForResult(toRegister,30);
-        });
-        String user,pwd;
-        user=username.getText().toString();
-        pwd=password.getText().toString();
-        loginButton.setOnClickListener(click->{
-            if(userFromLast!=null){
-                while(results.moveToNext()){
-
-                    String pwdInDB=results.getString(passIDX);
-                    String userInDB=results.getString(UserIDX);
-                    if(userFromLast.equals(userInDB)&&pwd.equals(pwdInDB)){
-                        Toast.makeText(this,getResources().getString(R.string.success2),Toast.LENGTH_LONG).show();
-                    }else{
-                        Toast.makeText(this,getResources().getString(R.string.error3),Toast.LENGTH_LONG).show();
-                    }
-                }
-            }else{
-                if(results.isLast()){
-                    results.moveToFirst();
-                }
-                while(results.moveToNext()){
-                    String pwdInDB=results.getString(passIDX);
-                    String userInDB=results.getString(UserIDX);
-                    if(user.equals(userInDB)&&pwd.equals(pwdInDB)){
-                        Toast.makeText(this,getResources().getString(R.string.success2),Toast.LENGTH_LONG).show();
-                    }else{
-                        Toast.makeText(this,getResources().getString(R.string.error3),Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
-        });*/
         String username;
-        Button loginBtn;
+        Button loginBtn,registerBtn;
         EditText userEdit = (EditText) findViewById(R.id.username);
         EditText passEdit=(EditText)findViewById(R.id.password);
         loginBtn = (Button) findViewById(R.id.login);
+        registerBtn=(Button)findViewById(R.id.register);
         //username=userEdit.getText().toString();
         SharedPreferences shared = getSharedPreferences("username", MODE_PRIVATE);
         username = shared.getString("username", "");
-
+        AccountDBOpener dbOpener=new AccountDBOpener(this);
+        registerBtn.setOnClickListener(click->{
+            Intent intent=new Intent(this,Register.class);
+            startActivity(intent);
+            finish();
+        });
         loginBtn.setOnClickListener(click -> {
-            if (!userEdit.getText().toString().equals("")) {
-                Intent intent = new Intent(this, StartPage.class);
-                intent.putExtra("typeUsername", userEdit.getText().toString());
-                //startActivityForResult(intent, 30);
-                startActivity(intent);
-                finish();
+            if (!userEdit.getText().toString().equals("")&&!passEdit.getText().toString().equals("")) {
+                ArrayList<Account> data=dbOpener.getAllData();
+                boolean match=false;
+                for(int i=0;i<data.size();i++){
+                    Account account=data.get(i);
+                    if(userEdit.getText().toString().equals(account.getName())&&passEdit.getText().toString().equals(account.getPassword())){
+                        match=true;
+                        break;
+                    }else{
+                        match=false;
+                    }
+                }
+                if(match) {
+                    Intent intent = new Intent(this, StartPage.class);
+                    intent.putExtra("typeUsername", userEdit.getText().toString());
+                    //startActivityForResult(intent, 30);
+                    startActivity(intent);
+                    Toast.makeText(this,getResources().getString(R.string.success2),Toast.LENGTH_LONG).show();
+                    finish();
+                }else{
+                    Toast.makeText(this,getResources().getString(R.string.error3),Toast.LENGTH_LONG).show();
+                }
             } else {
                 Toast.makeText(this, getResources().getString(R.string.error1), Toast.LENGTH_LONG).show();
             }

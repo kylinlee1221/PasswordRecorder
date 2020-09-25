@@ -30,6 +30,7 @@
     <string name="yesBtn">Yes</string>
     <string name="noBtn">no</string>
     <string name="BackToFront">Click here back to front</string>
+    <string name="back">Back to login</string>
     <string-array name="website">
         <item>Google</item>
         <item>Facebook</item>

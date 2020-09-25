@@ -31,6 +31,7 @@
     <string name="yesBtn">是</string>
     <string name="noBtn">否</string>
     <string name="BackToFront">返回首页</string>
+    <string name="back">返回登录页面</string>
     <string-array name="website">
         <item>Google</item>
         <item>Facebook</item>
