@@ -21,7 +21,7 @@
     <string name="success1">注册成功! 去登录</string>
     <string name="success2">登录成功</string>
     <string name="info1">欢迎回来 </string>
-    <string name="info2">The info you enter is:</string>
+    <string name="info2">你输入的信息为:</string>
     <string name="info3">确认删除?</string>
     <string name="exit1">再按一次退出</string>
     <string name="infoUser">用户名:</string>
