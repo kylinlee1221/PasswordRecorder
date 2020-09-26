@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 if(match) {
                     Intent intent = new Intent(this, StartPage.class);
                     intent.putExtra("typeUsername", userEdit.getText().toString());
+                    intent.putExtra("typePassword",passEdit.getText().toString());
                     //startActivityForResult(intent, 30);
                     startActivity(intent);
                     Toast.makeText(this,getResources().getString(R.string.success2),Toast.LENGTH_LONG).show();

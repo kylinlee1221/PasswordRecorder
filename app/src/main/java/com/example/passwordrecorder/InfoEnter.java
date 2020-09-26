@@ -4,14 +4,18 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -39,6 +43,7 @@ public class InfoEnter extends AppCompatActivity {
         setContentView(R.layout.activity_info_enter);
         Spinner website=(Spinner)findViewById(R.id.registerWeb);
         EditText usernameET,passwordET,securityET,websiteET;
+        UserDBOpener opener=new UserDBOpener(this);
         Button addBtn;
         final Boolean[] flag = {false};
         String usName,pwdET,secET;
@@ -51,6 +56,23 @@ public class InfoEnter extends AppCompatActivity {
         pwdET=passwordET.getText().toString();
         secET=securityET.getText().toString();
         final String[] websiteSelect = new String[1];
+        Intent fromLast=getIntent();
+        String accUser=fromLast.getStringExtra("accUser");
+        String accPass=fromLast.getStringExtra("accPass");
+        //assert accUser != null;
+
+
+        SharedPreferences shared=getSharedPreferences("username",MODE_PRIVATE);
+        SharedPreferences.Editor editor = shared.edit();
+        if(accUser!=null) {
+            editor.putString("username", accUser);
+            editor.apply();
+        }
+        if(accUser!=null) {
+        }else{
+            shared=getSharedPreferences("username",MODE_PRIVATE);
+            accUser=shared.getString("username","");
+        }
         //website.setPrompt(getResources().getString(R.string.registerInfo).toString());
         //initDatas();
         //adapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,list);
@@ -92,6 +114,8 @@ public class InfoEnter extends AppCompatActivity {
 
         });
         if(addBtn!=null){
+            String finalAccUser = accUser;
+            //String finalAccUser1 = accUser;
             addBtn.setOnClickListener(click->{
                 if(!usernameET.getText().toString().equals("") && !passwordET.getText().toString().equals("") && !securityET.getText().toString().equals("")){
                     AlertDialog.Builder builder=new AlertDialog.Builder(InfoEnter.this);
@@ -104,11 +128,17 @@ public class InfoEnter extends AppCompatActivity {
                                     go.putExtra("username",usernameET.getText().toString());
                                     go.putExtra("password",passwordET.getText().toString());
                                     go.putExtra("secPhone",securityET.getText().toString());
+                                    go.putExtra("accUser",finalAccUser);
+                                    go.putExtra("accPass",accPass);
                                     if(!flag[0]) {
                                         go.putExtra("website", websiteSelect[0]);
                                     }else{
                                         go.putExtra("website",websiteET.getText().toString());
                                     }
+
+
+                                    //go.putExtra("accUser", finalAccUser);
+                                    //go.putExtra("accPass",accPass);
                                     //startActivityForResult(go,30);
                                     startActivity(go);
                                     finish();
@@ -174,8 +204,17 @@ public class InfoEnter extends AppCompatActivity {
     }
     @Override
     protected void onPause() {
-        finish();
         super.onPause();
+        Intent fromMain=getIntent();
+        String userFrom=fromMain.getStringExtra("accUser");
+        SharedPreferences shared = getSharedPreferences("username", MODE_PRIVATE);
+        SharedPreferences.Editor editor = shared.edit();
+        if(userFrom!=null) {
+            editor.putString("username", userFrom);
+            editor.apply();
+        }
+        //finish();
+
     }
     private void initDatas(){
         //list=new ArrayList<String>();

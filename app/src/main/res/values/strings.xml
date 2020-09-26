@@ -17,6 +17,7 @@
     <string name="error1">Please enter info</string>
     <string name="error2">Exist username, change it.</string>
     <string name="error3">Wrong info</string>
+    <string name="error4">No info there please add</string>
     <string name="success1">Register complete! Go to Login</string>
     <string name="success2">Login successfully</string>
     <string name="info1">Welcome back </string>
@@ -31,6 +32,7 @@
     <string name="noBtn">no</string>
     <string name="BackToFront">Click here back to front</string>
     <string name="back">Back to login</string>
+    <string name="returnToLogin">Click here to return</string>
     <string-array name="website">
         <item>Google</item>
         <item>Facebook</item>

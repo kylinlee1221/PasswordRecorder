@@ -24,6 +24,7 @@ public class StartPage extends AppCompatActivity {
 
         Intent fromMain=getIntent();
         String userFrom=fromMain.getStringExtra("typeUsername");
+        String passFrom=fromMain.getStringExtra("typePassword");
         SharedPreferences shared=getSharedPreferences("username",MODE_PRIVATE);
         SharedPreferences.Editor editor = shared.edit();
         if(userFrom!=null) {
@@ -42,22 +43,36 @@ public class StartPage extends AppCompatActivity {
             showUser.setText(getResources().getString(R.string.info1) + " " + userFrom);
             showUser.setTextColor(Color.RED);
         }
-        Button add,show;
+        Button add,show,logout;
         add=(Button) findViewById(R.id.addPassword);
         show=(Button)findViewById(R.id.checkInfo);
+        logout=(Button)findViewById(R.id.backToMain);
         if(add!=null){
+            String finalUserFrom = userFrom;
             add.setOnClickListener(click->{
                 Intent gotoAdd=new Intent(this,InfoEnter.class);
                 //startActivityForResult(gotoAdd,30);
+                gotoAdd.putExtra("accUser", finalUserFrom);
+                //gotoAdd.putExtra("accPass",passFrom);
                 startActivity(gotoAdd);
                 finish();
             });
         }
         if(show!=null){
+            String finalUserFrom = userFrom;
             show.setOnClickListener(click->{
                 Intent gotoShow=new Intent(this,Info.class);
+                gotoShow.putExtra("accUser", finalUserFrom);
+                //gotoShow.putExtra("accPass",passFrom);
                 //startActivityForResult(gotoShow,30);
                 startActivity(gotoShow);
+                finish();
+            });
+        }
+        if(logout!=null){
+            logout.setOnClickListener(click->{
+                Intent intent=new Intent(this,MainActivity.class);
+                startActivity(intent);
                 finish();
             });
         }
