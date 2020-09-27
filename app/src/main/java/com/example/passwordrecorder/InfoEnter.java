@@ -34,6 +34,7 @@ import java.util.List;
 public class InfoEnter extends AppCompatActivity {
 
     String[] list;
+    String[] phoneCodeList;
     //ArrayAdapter<String> adapter;
     //private List<String> list;
     @SuppressLint("ClickableViewAccessibility")
@@ -42,6 +43,7 @@ public class InfoEnter extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_enter);
         Spinner website=(Spinner)findViewById(R.id.registerWeb);
+        Spinner phoneCode=(Spinner)findViewById(R.id.phoneCode);
         EditText usernameET,passwordET,securityET,websiteET;
         UserDBOpener opener=new UserDBOpener(this);
         Button addBtn;
@@ -56,12 +58,11 @@ public class InfoEnter extends AppCompatActivity {
         pwdET=passwordET.getText().toString();
         secET=securityET.getText().toString();
         final String[] websiteSelect = new String[1];
+        final String[] phoneSelect=new String[1];
         Intent fromLast=getIntent();
         String accUser=fromLast.getStringExtra("accUser");
         String accPass=fromLast.getStringExtra("accPass");
         //assert accUser != null;
-
-
         SharedPreferences shared=getSharedPreferences("username",MODE_PRIVATE);
         SharedPreferences.Editor editor = shared.edit();
         if(accUser!=null) {
@@ -78,6 +79,7 @@ public class InfoEnter extends AppCompatActivity {
         //adapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,list);
         //website.setAdapter(adapter);
         list=getResources().getStringArray(R.array.website).clone();
+        phoneCodeList=getResources().getStringArray(R.array.numberCode).clone();
         website.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -113,21 +115,48 @@ public class InfoEnter extends AppCompatActivity {
             }
 
         });
+        phoneCode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                phoneSelect[0]=phoneCodeList[position];
+                securityET.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        phoneSelect[0]=phoneCodeList[position]+" "+securityET.getText().toString();
+                    }
+                });
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         if(addBtn!=null){
             String finalAccUser = accUser;
             //String finalAccUser1 = accUser;
             addBtn.setOnClickListener(click->{
-                if(!usernameET.getText().toString().equals("") && !passwordET.getText().toString().equals("") && !securityET.getText().toString().equals("")){
+                if(!usernameET.getText().toString().equals("") && !passwordET.getText().toString().equals("") && !phoneSelect[0].equals("")){
                     AlertDialog.Builder builder=new AlertDialog.Builder(InfoEnter.this);
                     builder.setTitle(getResources().getString(R.string.info2))
-                            .setMessage(getResources().getString(R.string.infoUser)+usernameET.getText().toString()+"\n"+getResources().getString(R.string.infoPwd)+passwordET.getText().toString()+"\n"+getResources().getString(R.string.infoWeb)+websiteSelect[0]+"\n"+getResources().getString(R.string.infoSecurity)+securityET.getText().toString()+"\n")
+                            .setMessage(getResources().getString(R.string.infoUser)+usernameET.getText().toString()+"\n"+getResources().getString(R.string.infoPwd)+passwordET.getText().toString()+"\n"+getResources().getString(R.string.infoWeb)+websiteSelect[0]+"\n"+getResources().getString(R.string.infoSecurity)+phoneSelect[0]+"\n")
                             .setPositiveButton(getResources().getText(R.string.yesBtn), new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     Intent go=new Intent(InfoEnter.this,Info.class);
                                     go.putExtra("username",usernameET.getText().toString());
                                     go.putExtra("password",passwordET.getText().toString());
-                                    go.putExtra("secPhone",securityET.getText().toString());
+                                    go.putExtra("secPhone",phoneSelect[0]);
                                     go.putExtra("accUser",finalAccUser);
                                     go.putExtra("accPass",accPass);
                                     if(!flag[0]) {

@@ -46,4 +46,9 @@
         <item>Steam</item>
         <item>other</item>
     </string-array>
+    <string-array name="numberCode">
+        <item>+1</item>
+        <item>+86</item>
+        <item>+852</item>
+    </string-array>
 </resources>
