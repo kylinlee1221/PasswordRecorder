@@ -14,15 +14,20 @@
     <string name="securityPhone">The security phone number you submit on website</string>
     <string name="enterSecurity">Enter phone number here</string>
     <string name="addBtn">Add it</string>
+    <string name="checkBtn">Check info</string>
+    <string name="changeBtn">Change password</string>
     <string name="error1">Please enter info</string>
     <string name="error2">Exist username, change it.</string>
     <string name="error3">Wrong info</string>
     <string name="error4">No info there please add</string>
+    <string name="error5">Wrong username</string>
     <string name="success1">Register complete! Go to Login</string>
     <string name="success2">Login successfully</string>
+    <string name="success3">Change success! Go to Login</string>
     <string name="info1">Welcome back </string>
     <string name="info2">The info you enter is:</string>
     <string name="info3">Are you sure you want to delete this?</string>
+    <string name="info4">Check Successed</string>
     <string name="exit1">Press another back to exit</string>
     <string name="infoUser">Username:</string>
     <string name="infoPwd">Password:</string>
@@ -30,9 +35,11 @@
     <string name="infoSecurity">Security phone:</string>
     <string name="yesBtn">Yes</string>
     <string name="noBtn">no</string>
+    <string name="sureBtn">confirm</string>
     <string name="BackToFront">Click here back to front</string>
     <string name="back">Back to login</string>
     <string name="returnToLogin">Click here to return</string>
+    <string name="findPass">Forget password</string>
     <string-array name="website">
         <item>Google</item>
         <item>Facebook</item>

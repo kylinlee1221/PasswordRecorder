@@ -36,8 +36,8 @@ public class AccountDBOpener extends SQLiteOpenHelper {
     public void delete(String name,String password){
         db.execSQL("DELETE FROM user WHERE name = AND password ="+name+password);
     }
-    public void update(String password){
-        db.execSQL("UPDATE user SET password = ?",new Object[]{password});
+    public void update(String name,String password){
+        db.execSQL("UPDATE user SET password = ? WHERE name = ?",new Object[]{password,name});
     }
     public ArrayList<Account> getAllData(){
 

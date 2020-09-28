@@ -27,11 +27,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         String username;
-        Button loginBtn,registerBtn;
+        Button loginBtn,registerBtn,findBtn;
         EditText userEdit = (EditText) findViewById(R.id.username);
         EditText passEdit=(EditText)findViewById(R.id.password);
         loginBtn = (Button) findViewById(R.id.login);
         registerBtn=(Button)findViewById(R.id.register);
+        findBtn=(Button)findViewById(R.id.findPass);
         //username=userEdit.getText().toString();
         SharedPreferences shared = getSharedPreferences("username", MODE_PRIVATE);
         username = shared.getString("username", "");
@@ -68,6 +69,11 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(this, getResources().getString(R.string.error1), Toast.LENGTH_LONG).show();
             }
+        });
+        findBtn.setOnClickListener(click->{
+            Intent intent=new Intent(this,FindPassword.class);
+            startActivity(intent);
+            finish();
         });
         final Drawable[] drawables=passEdit.getCompoundDrawables();
         final int eyeWidth=drawables[2].getBounds().width();
