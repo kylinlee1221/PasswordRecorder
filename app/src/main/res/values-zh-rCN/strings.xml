@@ -17,6 +17,8 @@
     <string name="addBtn">添加</string>
     <string name="checkBtn">检查信息</string>
     <string name="changeBtn">修改密码</string>
+    <string name="checkInGuthub">在github中查看代码</string>
+    <string name="reportBtn">反馈问题</string>
     <string name="error1">信息不能为空</string>
     <string name="error2">用户名已存在</string>
     <string name="error3">用户名或密码错误</string>
@@ -41,6 +43,8 @@
     <string name="back">返回登录页面</string>
     <string name="returnToLogin">返回首页</string>
     <string name="findPass">忘记密码</string>
+    <string name="aboutUs">关于</string>
+    <string name="popAbout">这个程序是由 Kylinlee\u00A9 制作的 \n 100%开源且免费 \n 你可以通过下面的按钮查看源代码 \n或者通过给26882137@qq.com反馈问题</string>
     <string-array name="website">
         <item>Google</item>
         <item>Facebook</item>

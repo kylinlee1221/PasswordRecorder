@@ -9,7 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FindPassword"></activity>
+        <activity android:name=".AboutPage"></activity>
+
+        <meta-data
+            android:name="com.google.android.actions"
+            android:resource="@xml/menu" />
+
+        <activity android:name=".FindPassword" />
         <activity android:name=".Register" />
         <activity android:name=".Info" />
         <activity android:name=".InfoEnter" />

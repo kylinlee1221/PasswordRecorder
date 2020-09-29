@@ -16,6 +16,8 @@
     <string name="addBtn">Add it</string>
     <string name="checkBtn">Check info</string>
     <string name="changeBtn">Change password</string>
+    <string name="checkInGuthub">Go to github</string>
+    <string name="reportBtn">report a bug</string>
     <string name="error1">Please enter info</string>
     <string name="error2">Exist username, change it.</string>
     <string name="error3">Wrong info</string>
@@ -40,6 +42,8 @@
     <string name="back">Back to login</string>
     <string name="returnToLogin">Click here to return</string>
     <string name="findPass">Forget password</string>
+    <string name="aboutUs">about</string>
+    <string name="popAbout">This program is designed by Kylinlee\u00A9 \n And it\'s 100% openSource and free \n You can check the code by click the button to github\n Or report bug by send e-mail to\n 26882137@qq.com</string>
     <string-array name="website">
         <item>Google</item>
         <item>Facebook</item>
