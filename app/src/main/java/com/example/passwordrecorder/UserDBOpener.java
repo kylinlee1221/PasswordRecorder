@@ -61,7 +61,7 @@ public class UserDBOpener extends SQLiteOpenHelper {
         newValue.put(COL_Website,website);
         newValue.put(COL_OPEN_ACCOUNT,openAccount);
         db.insert(Table_Name,null,newValue);
-        Log.e("SQL STATUS",db.toString());
+        //Log.e("SQL STATUS",db.toString());
     }
     public void delete(UserInfo info){
         db.delete(UserDBOpener.Table_Name,UserDBOpener.COL_ID+"=?",new String[]{Long.toString(info.getUserId())});
