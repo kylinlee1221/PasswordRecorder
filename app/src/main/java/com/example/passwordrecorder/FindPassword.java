@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -47,7 +48,7 @@ public class FindPassword extends AppCompatActivity {
                         }).create().show();
                         break;
                     }else{
-                        Toast.makeText(this,getResources().getString(R.string.error5),Toast.LENGTH_LONG).show();
+                        //Toast.makeText(this,getResources().getString(R.string.error5),Toast.LENGTH_LONG).show();
                     }
                 }
             }else{
@@ -102,5 +103,15 @@ public class FindPassword extends AppCompatActivity {
             }
             //return false;
         });
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event){
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            Intent intent=new Intent(FindPassword.this,MainActivity.class);
+            startActivity(intent);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

@@ -27,7 +27,7 @@ import java.util.Locale;
 
 public class Info extends AppCompatActivity {
     private ArrayList<UserInfo> infoList=new ArrayList<>();
-    SQLiteDatabase db;
+    //SQLiteDatabase db;
 
     MyAdapter adapter;
     @Override
@@ -36,7 +36,6 @@ public class Info extends AppCompatActivity {
         setContentView(R.layout.activity_info);
         ListView myList=(ListView)findViewById(R.id.infoList);
         UserDBOpener opener=new UserDBOpener(this);
-        db=opener.getWritableDatabase();
         Intent fromLast=getIntent();
         String username=fromLast.getStringExtra("username");
         String password=fromLast.getStringExtra("password");
@@ -54,7 +53,7 @@ public class Info extends AppCompatActivity {
             accUser=shared.getString("username","");
         }
         String[] cols={opener.COL_ID,opener.COL_User,opener.COL_Pass,opener.COL_SEC,opener.COL_Website};
-        if(accUser!=null) {
+        /*if(accUser!=null) {
             if (db != null) {
                 Cursor cursor = db.rawQuery("select * from InfoTable where accuser = ?", new String[]{accUser});
                 if(cursor.moveToFirst()){
@@ -78,7 +77,7 @@ public class Info extends AppCompatActivity {
                 Toast.makeText(this,getResources().getString(R.string.error4),Toast.LENGTH_LONG).show();
             }
 
-        }
+        }*/
 
         /*Cursor results=db.query(false,opener.Table_Name,cols,opener.COL_OPEN_ACCOUNT+"=?",new String[]{accUser},null,null,null,null);
         int idCID=results.getColumnIndex(opener.COL_ID);
@@ -100,12 +99,19 @@ public class Info extends AppCompatActivity {
             adapter.notifyDataSetChanged();
         }*/
 
+        if(accUser!=null) {
+            infoList = opener.getUserData(accUser);
+            adapter = new MyAdapter();
+            myList.setAdapter(adapter);
+            myList.setSelection(adapter.getCount() - 1);
+            adapter.notifyDataSetChanged();
+        }
         if (username != null&&password!=null&&secPhone!=null&&website!=null&&accUser!=null) {
 
             adapter = new MyAdapter();
             myList.setAdapter(adapter);
             myList.setSelection(adapter.getCount() - 1);
-            ContentValues newRow = new ContentValues();
+            /*ContentValues newRow = new ContentValues();
             newRow.put(opener.COL_User, username);
             newRow.put(opener.COL_Pass, password);
             newRow.put(opener.COL_SEC, secPhone);
@@ -117,19 +123,13 @@ public class Info extends AppCompatActivity {
             if(newID!=-1) {
                 UserInfo newInfo = new UserInfo(username, password, website, secPhone, newID);
                 infoList.add(newInfo);
-            }
+            }*/
             adapter = new MyAdapter();
             adapter.notifyDataSetChanged();
             myList.setSelection(adapter.getCount() - 1);
         }
 
-        /*if(accUser!=null&&accPass!=null) {
-            infoList = opener.getUserData(accUser);
-            adapter = new MyAdapter();
-            myList.setAdapter(adapter);
-            myList.setSelection(adapter.getCount() - 1);
-            adapter.notifyDataSetChanged();
-        }*/
+
         //assert username != null;
 
         Button goBack=(Button)findViewById(R.id.BtnBackToFront);
@@ -145,8 +145,9 @@ public class Info extends AppCompatActivity {
             AlertDialog.Builder builder=new AlertDialog.Builder(this);
             UserInfo info1=infoList.get(pos);
             builder.setTitle(getResources().getString(R.string.info3)).setPositiveButton(getResources().getString(R.string.yesBtn),(click,arg)->{
-                deleteInfo(info1);
+                //deleteInfo(info1);
                 //opener.delete(info1.getUsername(),info1.getPassword());
+                opener.delete(info1);
                 infoList.remove(pos);
                 //adapter=new MyAdapter();
                 adapter.notifyDataSetChanged();
@@ -156,10 +157,6 @@ public class Info extends AppCompatActivity {
             }).setNegativeButton(getResources().getString(R.string.noBtn),(click,arg)->{}).create().show();
             return true;
         });
-    }
-    private void deleteInfo(UserInfo info){
-        db.delete(UserDBOpener.Table_Name,UserDBOpener.COL_ID+"=?",new String[]{Long.toString(info.getUserId())});
-        //opener.delete(userName,Password);
     }
     protected class MyAdapter extends BaseAdapter {
 

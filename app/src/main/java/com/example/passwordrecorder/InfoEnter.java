@@ -154,7 +154,7 @@ public class InfoEnter extends AppCompatActivity {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     Intent go=new Intent(InfoEnter.this,Info.class);
-                                    go.putExtra("username",usernameET.getText().toString());
+                                    /*go.putExtra("username",usernameET.getText().toString());
                                     go.putExtra("password",passwordET.getText().toString());
                                     go.putExtra("secPhone",phoneSelect[0]);
                                     go.putExtra("accUser",finalAccUser);
@@ -163,8 +163,8 @@ public class InfoEnter extends AppCompatActivity {
                                         go.putExtra("website", websiteSelect[0]);
                                     }else{
                                         go.putExtra("website",websiteET.getText().toString());
-                                    }
-
+                                    }*/
+                                    opener.add(usernameET.getText().toString(),passwordET.getText().toString(),phoneSelect[0],websiteSelect[0],finalAccUser);
 
                                     //go.putExtra("accUser", finalAccUser);
                                     //go.putExtra("accPass",accPass);
