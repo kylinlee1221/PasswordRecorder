@@ -67,6 +67,7 @@ public class InfoEnter extends AppCompatActivity {
         //assert accUser != null;
         SharedPreferences shared=getSharedPreferences("username",MODE_PRIVATE);
         SharedPreferences.Editor editor = shared.edit();
+        //addBtn.bringToFront();
         if(accUser!=null) {
             editor.putString("username", accUser);
             editor.apply();

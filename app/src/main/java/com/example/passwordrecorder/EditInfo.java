@@ -32,6 +32,7 @@ public class EditInfo extends AppCompatActivity {
         setContentView(R.layout.activity_edit_info);
         ListView myList=(ListView)findViewById(R.id.infoList2);
         Button back=findViewById(R.id.BtnBackToFront2);
+
         UserDBOpener opener=new UserDBOpener(this);
         Intent fromLast=getIntent();
         String accUser=fromLast.getStringExtra("accUser");
@@ -53,6 +54,7 @@ public class EditInfo extends AppCompatActivity {
         }else if(opener.getUserData(accUser).size()==0){
             Toast.makeText(this,getResources().getString(R.string.error4),Toast.LENGTH_LONG).show();
         }
+        back.bringToFront();
         String finalAccUser = accUser;
         myList.setOnItemLongClickListener((p, b, pos, id)->{
             AlertDialog.Builder builder=new AlertDialog.Builder(this);

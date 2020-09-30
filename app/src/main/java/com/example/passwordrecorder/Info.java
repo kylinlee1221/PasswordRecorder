@@ -135,6 +135,7 @@ public class Info extends AppCompatActivity {
         //assert username != null;
 
         Button goBack=(Button)findViewById(R.id.BtnBackToFront);
+        goBack.bringToFront();
         if(goBack!=null){
             goBack.setOnClickListener(click->{
                 Intent back=new Intent(this,StartPage.class);

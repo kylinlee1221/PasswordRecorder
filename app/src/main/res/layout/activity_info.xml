@@ -11,6 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/infoList"
+        android:transcriptMode="alwaysScroll"
+        android:layout_weight="8"
         />
     <Button
         android:layout_width="match_parent"
