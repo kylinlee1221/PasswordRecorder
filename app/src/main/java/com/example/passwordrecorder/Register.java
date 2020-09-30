@@ -14,9 +14,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class Register extends AppCompatActivity {
 
@@ -34,6 +36,16 @@ public class Register extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+        final String[] realCode = {null};
+        EditText realCodeIn=findViewById(R.id.et_registeractivity_phoneCodes);
+        ImageView realCodeImg=findViewById(R.id.iv_registeractivity_showCode);
+        realCodeImg.setImageBitmap(Code.getInstance().createBitmap());
+        realCode[0] =Code.getInstance().getCode().toLowerCase();
+        final String[] finalRealCode = {realCode[0]};
+        realCodeImg.setOnClickListener(click->{
+            realCodeImg.setImageBitmap(Code.getInstance().createBitmap());
+            finalRealCode[0] =Code.getInstance().getCode().toLowerCase();
+        });
         registerBtn.setOnClickListener(click->{
             if(!accountReg.getText().toString().equals("")&&!passwordReg.getText().toString().equals("")){
                 ArrayList<Account> data=opener.getAllData();
@@ -50,11 +62,13 @@ public class Register extends AppCompatActivity {
                 if(match){
                     Toast.makeText(this,getResources().getString(R.string.error2),Toast.LENGTH_LONG).show();
                 }else{
-                    opener.add(accountReg.getText().toString(),passwordReg.getText().toString());
-                    Intent intent=new Intent(this,MainActivity.class);
-                    startActivity(intent);
-                    Toast.makeText(this,getResources().getString(R.string.success1),Toast.LENGTH_LONG).show();
-                    finish();
+                    if(realCodeIn.getText().toString().toLowerCase().equals(finalRealCode[0])) {
+                        opener.add(accountReg.getText().toString(), passwordReg.getText().toString());
+                        Intent intent = new Intent(this, MainActivity.class);
+                        startActivity(intent);
+                        Toast.makeText(this, getResources().getString(R.string.success1), Toast.LENGTH_LONG).show();
+                        finish();
+                    }
                 }
             }else{
                 Toast.makeText(this,getResources().getString(R.string.error1),Toast.LENGTH_LONG).show();
@@ -97,6 +111,7 @@ public class Register extends AppCompatActivity {
             }
             //return false;
         });
+
     }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event){

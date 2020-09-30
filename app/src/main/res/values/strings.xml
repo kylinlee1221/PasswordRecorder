@@ -47,6 +47,8 @@
     <string name="findPass">Forget password</string>
     <string name="aboutUs">about</string>
     <string name="popAbout">This program is designed by Kylinlee\u00A9 \n And it\'s 100% openSource and free \n You can check the code by click the button to github\n Or report bug by send e-mail to\n 26882137@qq.com</string>
+    <string name="secCode">Safety Code:</string>
+    <string name="secCodeHint">Enter safety code here</string>
     <string-array name="website">
         <item>Google</item>
         <item>Facebook</item>
