@@ -78,6 +78,17 @@ public class StartPage extends AppCompatActivity {
                 finish();
             });
         }
+        Button goEdit=findViewById(R.id.editInfo);
+        //String finalAccUser = accUser;
+        if(goEdit!=null) {
+            String finalUserFrom = userFrom;
+            goEdit.setOnClickListener(click -> {
+                Intent edit = new Intent(this, EditInfo.class);
+                edit.putExtra("accUser", finalUserFrom);
+                startActivity(edit);
+                finish();
+            });
+        }
     }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event){

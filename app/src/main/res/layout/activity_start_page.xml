@@ -22,9 +22,16 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/editInfo"
+        android:text="@string/edit"
+        android:textColor="@android:color/holo_orange_dark"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/checkInfo"
         android:text="@string/checkInfo"
         android:textColor="@android:color/holo_red_dark"/>
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

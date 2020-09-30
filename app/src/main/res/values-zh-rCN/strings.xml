@@ -11,6 +11,8 @@
     <string name="birthDay">输入生日</string>
     <string name="addPassword">添加账户信息</string>
     <string name="checkInfo">查看已存储的信息</string>
+    <string name="edit">修改已存储的信息</string>
+    <string name="editHint">通过长按信息去编辑</string>
     <string name="registerInfo">注册地</string>
     <string name="securityPhone">输入注册时的手机号</string>
     <string name="enterSecurity">再此输入手机号</string>
@@ -31,6 +33,7 @@
     <string name="info2">你输入的信息为:</string>
     <string name="info3">确认删除?</string>
     <string name="info4">检查成功</string>
+    <string name="info5">确认修改?</string>
     <string name="exit1">再按一次退出</string>
     <string name="infoUser">用户名:</string>
     <string name="infoPwd">密码:</string>

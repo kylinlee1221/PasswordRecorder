@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AboutPage"></activity>
+        <activity android:name=".GetInEdit"></activity>
+        <activity android:name=".EditInfo" />
+        <activity android:name=".AboutPage" />
 
         <meta-data
             android:name="com.google.android.actions"

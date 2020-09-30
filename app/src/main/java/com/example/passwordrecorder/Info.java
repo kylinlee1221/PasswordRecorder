@@ -159,6 +159,7 @@ public class Info extends AppCompatActivity {
             }).setNegativeButton(getResources().getString(R.string.noBtn),(click,arg)->{}).create().show();
             return true;
         });
+
     }
     protected class MyAdapter extends BaseAdapter {
 
