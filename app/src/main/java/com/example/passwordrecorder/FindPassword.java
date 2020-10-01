@@ -46,11 +46,12 @@ public class FindPassword extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 checkFlag[0] =true;
+                                pass.setText("");
                             }
                         }).create().show();
                         break;
-                    }else{
-                        //Toast.makeText(this,getResources().getString(R.string.error5),Toast.LENGTH_LONG).show();
+                    }else if(i==data.size()-1&&!checkFlag[0]){
+                        Toast.makeText(this,getResources().getString(R.string.error5),Toast.LENGTH_LONG).show();
                     }
                 }
             }else{
@@ -60,11 +61,24 @@ public class FindPassword extends AppCompatActivity {
         change.setOnClickListener(click->{
             if(!pass.getText().toString().equals("")){
                 if(checkFlag[0]){
-                    opener.update(user.getText().toString(),pass.getText().toString());
+                    /*opener.update(user.getText().toString(),pass.getText().toString());
                     Toast.makeText(this,getResources().getString(R.string.success3),Toast.LENGTH_LONG).show();
                     Intent intent=new Intent(FindPassword.this,MainActivity.class);
                     startActivity(intent);
-                    finish();
+                    finish();*/
+                    ArrayList<Account> data=opener.getAllData();
+                    for(int i=0;i<data.size();i++){
+                        Account p=data.get(i);
+                        if(!p.getPassword().equals(pass.getText().toString())&&p.getName().equals(user.getText().toString())){
+                            opener.update(user.getText().toString(),pass.getText().toString());
+                            Toast.makeText(this,getResources().getString(R.string.success3),Toast.LENGTH_LONG).show();
+                            Intent intent=new Intent(FindPassword.this,MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }else if (p.getPassword().equals(pass.getText().toString())&&p.getName().equals(user.getText().toString())){
+                            Toast.makeText(this,getResources().getString(R.string.error7),Toast.LENGTH_LONG).show();
+                        }
+                    }
                 }
             }
         });

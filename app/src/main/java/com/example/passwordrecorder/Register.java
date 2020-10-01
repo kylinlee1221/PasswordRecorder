@@ -68,6 +68,10 @@ public class Register extends AppCompatActivity {
                         startActivity(intent);
                         Toast.makeText(this, getResources().getString(R.string.success1), Toast.LENGTH_LONG).show();
                         finish();
+                    }else{
+                        Toast.makeText(this,getResources().getString(R.string.error6),Toast.LENGTH_LONG).show();
+                        realCodeImg.setImageBitmap(Code.getInstance().createBitmap());
+                        finalRealCode[0]=Code.getInstance().getCode().toLowerCase();
                     }
                 }
             }else{

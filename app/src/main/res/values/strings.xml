@@ -16,7 +16,7 @@
     <string name="securityPhone">The security phone number you submit on website</string>
     <string name="enterSecurity">Enter phone number here</string>
     <string name="addBtn">Add it</string>
-    <string name="checkBtn">Check info</string>
+    <string name="checkBtn">Check if username is exist</string>
     <string name="changeBtn">Change password</string>
     <string name="checkInGuthub">Go to github</string>
     <string name="reportBtn">report a bug</string>
@@ -25,6 +25,8 @@
     <string name="error3">Wrong info</string>
     <string name="error4">No info there please add</string>
     <string name="error5">Wrong username</string>
+    <string name="error6">Wrong securityCode</string>
+    <string name="error7">Old password can\'t be same with new password</string>
     <string name="success1">Register complete! Go to Login</string>
     <string name="success2">Login successfully</string>
     <string name="success3">Change success! Go to Login</string>
