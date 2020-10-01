@@ -34,6 +34,7 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class InfoEnter extends AppCompatActivity {
 
@@ -121,7 +122,7 @@ public class InfoEnter extends AppCompatActivity {
         phoneCode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                phoneSelect[0] = phoneCodeList[position];
+                //phoneSelect[0] = phoneCodeList[position];
                 securityET.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -149,6 +150,7 @@ public class InfoEnter extends AppCompatActivity {
 
             }
         });
+
         otherET.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -174,9 +176,9 @@ public class InfoEnter extends AppCompatActivity {
             String finalAccUser = accUser;
             //String finalAccUser1 = accUser;
             addBtn.setOnClickListener(click->{
-                //Log.e("phone",phoneSelect[0]);
-                //Log.e("web",websiteSelect[0]);
-                //Log.e("other",otherSelect[0]);
+                Log.e("phone",phoneSelect[0]);
+                Log.e("web",websiteSelect[0]);
+                Log.e("other",otherSelect[0]);
                 if(!usernameET.getText().toString().equals("") && !passwordET.getText().toString().equals("") && !phoneSelect[0].equals("")&&!websiteSelect[0].equals("")&&!otherSelect[0].equals("")){
                     AlertDialog.Builder builder=new AlertDialog.Builder(InfoEnter.this);
                     builder.setTitle(getResources().getString(R.string.info6))

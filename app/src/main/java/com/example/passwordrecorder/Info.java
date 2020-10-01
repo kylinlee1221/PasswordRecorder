@@ -198,16 +198,15 @@ public class Info extends AppCompatActivity {
             }else {
                 rowMessage.setText((thisRow.getInfo()));
             }*/
-            if(!thisRow.getOtherInfo().equals("empty3")&&thisRow.getSecPhone().equals("empty3")){
+            //Log.i("otherinfo status", String.valueOf(thisRow.getOtherInfo().equals("empty3")));
+            //Log.i("secinfo status", String.valueOf(thisRow.getSecPhone().equals("empty3")));
+            if(!thisRow.getOtherInfo().equals("empty3")&thisRow.getSecPhone().equals("empty3")){
                 rowMessage.setText(getResources().getString(R.string.infoUser)+thisRow.getUsername()+"\n"+getResources().getString(R.string.infoPwd)+thisRow.getPassword()+"\n"+getResources().getString(R.string.infoWeb)+thisRow.getWebsite()+"\n"+getResources().getString(R.string.infoOther)+thisRow.getOtherInfo());
-            }
-            if(thisRow.getOtherInfo().equals("empty3")&&!thisRow.getSecPhone().equals("empty3")){
+            } else if(thisRow.getOtherInfo().equals("empty3")&!thisRow.getSecPhone().equals("empty3")){
                 rowMessage.setText(getResources().getString(R.string.infoUser)+thisRow.getUsername()+"\n"+getResources().getString(R.string.infoPwd)+thisRow.getPassword()+"\n"+getResources().getString(R.string.infoWeb)+thisRow.getWebsite()+"\n"+getResources().getString(R.string.infoSecurity)+thisRow.getSecPhone());
-            }
-            if(!thisRow.getSecPhone().equals("empty3")&&!thisRow.getSecPhone().equals("empty3")){
+            }else if(!thisRow.getSecPhone().equals("empty3")&!thisRow.getSecPhone().equals("empty3")){
                 rowMessage.setText(getResources().getString(R.string.infoUser)+thisRow.getUsername()+"\n"+getResources().getString(R.string.infoPwd)+thisRow.getPassword()+"\n"+getResources().getString(R.string.infoWeb)+thisRow.getWebsite()+"\n"+getResources().getString(R.string.infoSecurity)+thisRow.getSecPhone()+"\n"+getResources().getString(R.string.infoOther)+thisRow.getOtherInfo());
-            }
-            if(thisRow.getOtherInfo().equals("empty3")&&thisRow.getSecPhone().equals("empty3")){
+            }else if(thisRow.getSecPhone().equals("empty3")&thisRow.getOtherInfo().equals("empty3")){
                 rowMessage.setText(getResources().getString(R.string.infoUser)+thisRow.getUsername()+"\n"+getResources().getString(R.string.infoPwd)+thisRow.getPassword()+"\n"+getResources().getString(R.string.infoWeb)+thisRow.getWebsite());
             }
             //rowMessage.setText(getResources().getString(R.string.infoUser)+thisRow.getUsername()+"\n"+getResources().getString(R.string.infoPwd)+thisRow.getPassword()+"\n"+getResources().getString(R.string.infoWeb)+thisRow.getWebsite()+"\n"+getResources().getString(R.string.infoSecurity)+thisRow.getSecPhone());
