@@ -1,14 +1,15 @@
 package com.example.passwordrecorder;
 
 public class UserInfo {
-    protected String username,password,secPhone,website;
+    protected String username,password,secPhone,website,otherInfo;
     protected long userId;
-    public UserInfo(String username,String password,String website,String secPhone,long userId){
+    public UserInfo(String username,String password,String website,String secPhone,long userId,String otherInfo){
         this.username=username;
         this.password=password;
         this.userId=userId;
         this.website=website;
         this.secPhone=secPhone;
+        this.otherInfo=otherInfo;
     }
 
     public String getWebsite() {
@@ -17,6 +18,10 @@ public class UserInfo {
 
     public String getSecPhone() {
         return secPhone;
+    }
+
+    public String getOtherInfo() {
+        return otherInfo;
     }
 
     public long getUserId() {
@@ -41,6 +46,10 @@ public class UserInfo {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public void setOtherInfo(String otherInfo) {
+        this.otherInfo = otherInfo;
     }
 
     public void setWebsite(String website) {

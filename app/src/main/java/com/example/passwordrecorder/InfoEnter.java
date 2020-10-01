@@ -26,6 +26,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.w3c.dom.Text;
@@ -46,47 +48,42 @@ public class InfoEnter extends AppCompatActivity {
         setContentView(R.layout.activity_info_enter);
         Spinner website=(Spinner)findViewById(R.id.registerWeb);
         Spinner phoneCode=(Spinner)findViewById(R.id.phoneCode);
-        EditText usernameET,passwordET,securityET,websiteET;
+        EditText usernameET,passwordET,securityET,websiteET,otherET;
         UserDBOpener opener=new UserDBOpener(this);
         Button addBtn;
+        //Switch secFlag,otherFlag;
+        TextView infoSec=findViewById(R.id.secInfo);
         final Boolean[] flag = {false};
-        String usName,pwdET,secET;
         usernameET=(EditText)findViewById(R.id.usernameEnter);
         passwordET=(EditText)findViewById(R.id.passwordEnter);
         securityET=(EditText)findViewById(R.id.phoneEnter);
         addBtn=(Button)findViewById(R.id.addBtn);
         websiteET=findViewById(R.id.webEnter);
-        usName=usernameET.getText().toString();
-        pwdET=passwordET.getText().toString();
-        secET=securityET.getText().toString();
+        //secFlag=findViewById(R.id.secSwitch);
+        //otherFlag=findViewById(R.id.otherInfoSwitch);
+        otherET=findViewById(R.id.otherInfoEnter);
         final String[] websiteSelect = new String[1];
         final String[] phoneSelect=new String[1];
+        final String[] otherSelect=new String[1];
+        phoneSelect[0]="empty3";
+        otherSelect[0]="empty3";
         Intent fromLast=getIntent();
         String accUser=fromLast.getStringExtra("accUser");
         String accPass=fromLast.getStringExtra("accPass");
-        //assert accUser != null;
         SharedPreferences shared=getSharedPreferences("username",MODE_PRIVATE);
         SharedPreferences.Editor editor = shared.edit();
-        //addBtn.bringToFront();
         if(accUser!=null) {
             editor.putString("username", accUser);
             editor.apply();
-        }
-        if(accUser!=null) {
         }else{
             shared=getSharedPreferences("username",MODE_PRIVATE);
             accUser=shared.getString("username","");
         }
-        //website.setPrompt(getResources().getString(R.string.registerInfo).toString());
-        //initDatas();
-        //adapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,list);
-        //website.setAdapter(adapter);
         list=getResources().getStringArray(R.array.website).clone();
         phoneCodeList=getResources().getStringArray(R.array.numberCode).clone();
         website.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //Toast.makeText(InfoEnter.this,"The website you chose is "+list[position],Toast.LENGTH_LONG).show();
                 websiteSelect[0] =list[position];
                 if(list[position].equals("other")){
                     websiteET.setVisibility(View.VISIBLE);
@@ -118,10 +115,13 @@ public class InfoEnter extends AppCompatActivity {
             }
 
         });
+        /*if(!secFlag.isChecked()){
+            phoneSelect[0]="empty3";
+        }*/
         phoneCode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                phoneSelect[0]=phoneCodeList[position];
+                phoneSelect[0] = phoneCodeList[position];
                 securityET.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -135,7 +135,11 @@ public class InfoEnter extends AppCompatActivity {
 
                     @Override
                     public void afterTextChanged(Editable s) {
-                        phoneSelect[0]=phoneCodeList[position]+" "+securityET.getText().toString();
+                        if(securityET.getText().toString().equals("")){
+                            phoneSelect[0]="empty3";
+                        }else {
+                            phoneSelect[0] = phoneCodeList[position] + " " + securityET.getText().toString();
+                        }
                     }
                 });
             }
@@ -145,33 +149,43 @@ public class InfoEnter extends AppCompatActivity {
 
             }
         });
+        otherET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(otherET.getText().toString().equals("")){
+                    otherSelect[0]="empty3";
+                }else {
+                    otherSelect[0] = otherET.getText().toString();
+                }
+            }
+        });
+        //if(!)
         if(addBtn!=null){
             String finalAccUser = accUser;
             //String finalAccUser1 = accUser;
             addBtn.setOnClickListener(click->{
-                if(!usernameET.getText().toString().equals("") && !passwordET.getText().toString().equals("") && !phoneSelect[0].equals("")){
+                //Log.e("phone",phoneSelect[0]);
+                //Log.e("web",websiteSelect[0]);
+                //Log.e("other",otherSelect[0]);
+                if(!usernameET.getText().toString().equals("") && !passwordET.getText().toString().equals("") && !phoneSelect[0].equals("")&&!websiteSelect[0].equals("")&&!otherSelect[0].equals("")){
                     AlertDialog.Builder builder=new AlertDialog.Builder(InfoEnter.this);
-                    builder.setTitle(getResources().getString(R.string.info2))
-                            .setMessage(getResources().getString(R.string.infoUser)+usernameET.getText().toString()+"\n"+getResources().getString(R.string.infoPwd)+passwordET.getText().toString()+"\n"+getResources().getString(R.string.infoWeb)+websiteSelect[0]+"\n"+getResources().getString(R.string.infoSecurity)+phoneSelect[0]+"\n")
+                    builder.setTitle(getResources().getString(R.string.info6))
                             .setPositiveButton(getResources().getText(R.string.yesBtn), new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    Intent go=new Intent(InfoEnter.this,Info.class);
-                                    /*go.putExtra("username",usernameET.getText().toString());
-                                    go.putExtra("password",passwordET.getText().toString());
-                                    go.putExtra("secPhone",phoneSelect[0]);
-                                    go.putExtra("accUser",finalAccUser);
-                                    go.putExtra("accPass",accPass);
-                                    if(!flag[0]) {
-                                        go.putExtra("website", websiteSelect[0]);
-                                    }else{
-                                        go.putExtra("website",websiteET.getText().toString());
-                                    }*/
-                                    opener.add(usernameET.getText().toString(),passwordET.getText().toString(),phoneSelect[0],websiteSelect[0],finalAccUser);
 
-                                    //go.putExtra("accUser", finalAccUser);
-                                    //go.putExtra("accPass",accPass);
-                                    //startActivityForResult(go,30);
+                                    Intent go=new Intent(InfoEnter.this,Info.class);
+                                    opener.add(usernameET.getText().toString(),passwordET.getText().toString(),phoneSelect[0],websiteSelect[0],finalAccUser,otherSelect[0]);
                                     startActivity(go);
                                     finish();
                                 }

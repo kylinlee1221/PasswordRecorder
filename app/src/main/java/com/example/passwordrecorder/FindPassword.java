@@ -16,6 +16,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ public class FindPassword extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_password);
         EditText user,pass;
+        TextView passHint;
         Button check,change;
         final Boolean[] checkFlag = {false};
         AccountDBOpener opener=new AccountDBOpener(this);
@@ -34,18 +36,25 @@ public class FindPassword extends AppCompatActivity {
         pass=(EditText)findViewById(R.id.passwordFind);
         check=(Button)findViewById(R.id.checkBtn);
         change=(Button)findViewById(R.id.changeBtn);
-
+        passHint=findViewById(R.id.passHint);
+        pass.setVisibility(View.INVISIBLE);
+        passHint.setVisibility(View.INVISIBLE);
         check.setOnClickListener(click->{
             if(!user.getText().toString().equals("")){
                 ArrayList<Account> data=opener.getAllData();
                 for(int i=0;i<data.size();i++){
                     Account sd=data.get(i);
+
                     if(sd.getName().equals(user.getText().toString())){
                         AlertDialog.Builder builder=new AlertDialog.Builder(FindPassword.this);
                         builder.setTitle(getResources().getString(R.string.info4)).setPositiveButton(getResources().getString(R.string.sureBtn), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 checkFlag[0] =true;
+                                check.setVisibility(View.INVISIBLE);
+                                change.setVisibility(View.VISIBLE);
+                                pass.setVisibility(View.VISIBLE);
+                                passHint.setVisibility(View.VISIBLE);
                                 pass.setText("");
                             }
                         }).create().show();

@@ -35,11 +35,13 @@
     <string name="info3">Are you sure you want to delete this?</string>
     <string name="info4">Check Successed</string>
     <string name="info5">Are you sure you want to edit this?</string>
+    <string name="info6">Are you sure you want to add this?</string>
     <string name="exit1">Press another back to exit</string>
     <string name="infoUser">Username:</string>
     <string name="infoPwd">Password:</string>
     <string name="infoWeb">Website:</string>
     <string name="infoSecurity">Security phone:</string>
+    <string name="infoOther">Other:</string>
     <string name="yesBtn">Yes</string>
     <string name="noBtn">no</string>
     <string name="sureBtn">confirm</string>
@@ -51,6 +53,9 @@
     <string name="popAbout">This program is designed by Kylinlee\u00A9 \n And it\'s 100% openSource and free \n You can check the code by click the button to github\n Or report bug by send e-mail to\n 26882137@qq.com</string>
     <string name="secCode">Safety Code:</string>
     <string name="secCodeHint">Enter safety code here</string>
+    <string name="secSwitch">Account need Security phone</string>
+    <string name="otherInfoSwitch">Account need other info</string>
+    <string name="otherInfoHint">Place other info here</string>
     <string-array name="website">
         <item>Google</item>
         <item>Facebook</item>

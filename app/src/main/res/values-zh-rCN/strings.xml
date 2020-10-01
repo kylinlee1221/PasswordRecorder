@@ -36,11 +36,13 @@
     <string name="info3">确认删除?</string>
     <string name="info4">检查成功</string>
     <string name="info5">确认修改?</string>
+    <string name="info6">确认添加?</string>
     <string name="exit1">再按一次退出</string>
     <string name="infoUser">用户名:</string>
     <string name="infoPwd">密码:</string>
     <string name="infoWeb">注册地:</string>
     <string name="infoSecurity">安全手机:</string>
+    <string name="infoOther">其他信息:</string>
     <string name="yesBtn">是</string>
     <string name="noBtn">否</string>
     <string name="sureBtn">确认</string>
@@ -52,6 +54,9 @@
     <string name="popAbout">这个程序是由 Kylinlee\u00A9 制作的 \n 100%开源且免费 \n 你可以通过下面的按钮查看源代码 \n或者通过给26882137@qq.com反馈问题</string>
     <string name="secCode">验证码:</string>
     <string name="secCodeHint">在此输入验证码</string>
+    <string name="secSwitch">账号需要安全手机</string>
+    <string name="otherInfoSwitch">账号需要其他信息</string>
+    <string name="otherInfoHint">在此输入其他信息</string>
     <string-array name="website">
         <item>Google</item>
         <item>Facebook</item>

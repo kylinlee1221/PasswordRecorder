@@ -21,6 +21,8 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class GetInEdit extends AppCompatActivity {
@@ -34,18 +36,26 @@ public class GetInEdit extends AppCompatActivity {
         //Intent fromLast=getIntent();
         final String[] websiteSelect = new String[1];
         final String[] phoneSelect=new String[1];
+        final String[] otherSelect=new String[1];
+        phoneSelect[0]="empty3";
+        otherSelect[0]="empty3";
         String accUser=fromLast.getStringExtra("accUser");
         String username=fromLast.getStringExtra("username");
         String password=fromLast.getStringExtra("password");
         String secPhone=fromLast.getStringExtra("secPhone");
         String website=fromLast.getStringExtra("webSite");
         UserDBOpener opener=new UserDBOpener(this);
-        EditText userET,passET,secET,webET;
+        EditText userET,passET,secET,webET,otherET;
+        TextView infoSec=findViewById(R.id.secInfo2);
+        Switch secFlag,otherFlag;
         Button addBtn2=findViewById(R.id.addBtn2);
         userET=findViewById(R.id.usernameEnter2);
         passET=findViewById(R.id.passwordEnter2);
         secET=findViewById(R.id.phoneEnter2);
         webET=findViewById(R.id.webEnter2);
+        otherET=findViewById(R.id.otherInfoEnter2);
+        //secFlag=findViewById(R.id.secSwitch2);
+        //otherFlag=findViewById(R.id.otherInfoSwitch2);
         Spinner webCode=findViewById(R.id.registerWeb2);
         Spinner phoneCode=findViewById(R.id.phoneCode2);
         SharedPreferences shared=getSharedPreferences("username",MODE_PRIVATE);
@@ -98,11 +108,38 @@ public class GetInEdit extends AppCompatActivity {
             }
 
         });
-        phoneCode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                phoneSelect[0]=phoneCodeList[position];
-                secET.addTextChangedListener(new TextWatcher() {
+                phoneCode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        phoneSelect[0] = phoneCodeList[position];
+                        secET.addTextChangedListener(new TextWatcher() {
+                            @Override
+                            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                            }
+
+                            @Override
+                            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                            }
+
+                            @Override
+                            public void afterTextChanged(Editable s) {
+                                if(secET.getText().toString().equals("")){
+                                    phoneSelect[0]="empty3";
+                                }else {
+                                    phoneSelect[0] = phoneCodeList[position] + " " + secET.getText().toString();
+                                }
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+                otherET.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -115,23 +152,19 @@ public class GetInEdit extends AppCompatActivity {
 
                     @Override
                     public void afterTextChanged(Editable s) {
-                        phoneSelect[0]=phoneCodeList[position]+" "+secET.getText().toString();
+                        if(otherET.getText().toString().equals("")){
+                            otherSelect[0]="empty3";
+                        }else {
+                            otherSelect[0] = otherET.getText().toString();
+                        }
                     }
                 });
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
         if(addBtn2!=null){
             String finalAccUser = accUser;
             addBtn2.setOnClickListener(click->{
-                if(!userET.getText().toString().equals("") && !passET.getText().toString().equals("") && !phoneSelect[0].equals("")&&!websiteSelect[0].equals("")){
+                if(!userET.getText().toString().equals("") && !passET.getText().toString().equals("") && !phoneSelect[0].equals("")&&!websiteSelect[0].equals("")&&!otherSelect[0].equals("")){
                     AlertDialog.Builder builder=new AlertDialog.Builder(this);
-                    builder.setTitle(getResources().getString(R.string.info2))
-                            .setMessage(getResources().getString(R.string.infoUser)+userET.getText().toString()+"\n"+getResources().getString(R.string.infoPwd)+passET.getText().toString()+"\n"+getResources().getString(R.string.infoWeb)+websiteSelect[0]+"\n"+getResources().getString(R.string.infoSecurity)+phoneSelect[0]+"\n")
+                    builder.setTitle(getResources().getString(R.string.info6))
                             .setPositiveButton(getResources().getText(R.string.yesBtn), new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
@@ -146,7 +179,7 @@ public class GetInEdit extends AppCompatActivity {
                                     }else{
                                         go.putExtra("website",websiteET.getText().toString());
                                     }*/
-                                    opener.add(userET.getText().toString(),passET.getText().toString(),phoneSelect[0],websiteSelect[0],finalAccUser);
+                                    opener.add(userET.getText().toString(),passET.getText().toString(),phoneSelect[0],websiteSelect[0],finalAccUser,otherSelect[0]);
 
                                     //go.putExtra("accUser", finalAccUser);
                                     //go.putExtra("accPass",accPass);

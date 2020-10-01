@@ -23,11 +23,12 @@ public class UserDBOpener extends SQLiteOpenHelper {
     public final static String COL_Website="website";
     public final static String COL_ID="_ID";
     public final static String COL_OPEN_ACCOUNT="accuser";
+    public final static String COL_OTHER_INFO="otherInfo";
     //public final static String COL_OPEN_PASSWORD="accPass";
     private SQLiteDatabase db;
 
     public final String DB_Run="create table if not exists "+Table_Name+"("+
-            COL_ID+" integer PRIMARY KEY AUTOINCREMENT, "+COL_User+" TEXT, "+COL_Pass+" TEXT, "+COL_SEC+" TEXT, "+COL_Website+" TEXT, "+COL_OPEN_ACCOUNT+" TEXT) ";
+            COL_ID+" integer PRIMARY KEY AUTOINCREMENT, "+COL_User+" TEXT, "+COL_Pass+" TEXT, "+COL_SEC+" TEXT, "+COL_Website+" TEXT, "+COL_OPEN_ACCOUNT+" TEXT, "+COL_OTHER_INFO+" TEXT)";
 
     public UserDBOpener(Context cnt) {
 
@@ -52,7 +53,7 @@ public class UserDBOpener extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void add(String username,String password,String secPhone,String website,String openAccount){
+    public void add(String username,String password,String secPhone,String website,String openAccount,String otherInfo){
         //db.execSQL("INSERT INTO "+Table_Name+" (username,password,securityPhone,website,accUser) VALUES(?,?,?,?,?) ",new String[]{username,password,secPhone,website,openAccount});
         ContentValues newValue=new ContentValues();
         newValue.put(COL_User,username);
@@ -60,6 +61,7 @@ public class UserDBOpener extends SQLiteOpenHelper {
         newValue.put(COL_SEC,secPhone);
         newValue.put(COL_Website,website);
         newValue.put(COL_OPEN_ACCOUNT,openAccount);
+        newValue.put(COL_OTHER_INFO,otherInfo);
         db.insert(Table_Name,null,newValue);
         //Log.e("SQL STATUS",db.toString());
     }
@@ -73,13 +75,14 @@ public class UserDBOpener extends SQLiteOpenHelper {
                 Cursor cursor = db.rawQuery("select * from InfoTable where accuser = ?", new String[]{openAccount});
                 if(cursor.moveToFirst()){
                     do{
-                        if(cursor.getColumnIndex(COL_Website)!=-1&&cursor.getColumnIndex(COL_User)!=-1&&cursor.getColumnIndex(COL_ID)!=-1&&cursor.getColumnIndex(COL_Pass)!=-1&&cursor.getColumnIndex(COL_SEC)!=-1&&cursor.getColumnIndex(COL_OPEN_ACCOUNT)!=-1) {
+                        if(cursor.getColumnIndex(COL_Website)!=-1&&cursor.getColumnIndex(COL_User)!=-1&&cursor.getColumnIndex(COL_ID)!=-1&&cursor.getColumnIndex(COL_Pass)!=-1&&cursor.getColumnIndex(COL_SEC)!=-1&&cursor.getColumnIndex(COL_OPEN_ACCOUNT)!=-1&&cursor.getColumnIndex(COL_OTHER_INFO)!=-1) {
                             String userDT = cursor.getString(cursor.getColumnIndex(COL_User));
                             String passDT = cursor.getString(cursor.getColumnIndex(COL_Pass));
                             String secDT = cursor.getString(cursor.getColumnIndex(COL_SEC));
                             String webDT = cursor.getString(cursor.getColumnIndex(COL_Website));
                             long idDT = cursor.getLong(cursor.getColumnIndex(COL_ID));
-                            list.add(new UserInfo(userDT, passDT, webDT, secDT, idDT));
+                            String otherDT=cursor.getString(cursor.getColumnIndex(COL_OTHER_INFO));
+                            list.add(new UserInfo(userDT, passDT, webDT, secDT, idDT,otherDT));
                             //adapter = new Info.MyAdapter();
                             //myList.setAdapter(adapter);
                             //myList.setSelection(adapter.getCount() - 1);
