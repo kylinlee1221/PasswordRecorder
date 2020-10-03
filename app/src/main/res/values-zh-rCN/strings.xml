@@ -21,6 +21,9 @@
     <string name="changeBtn">修改密码</string>
     <string name="checkInGuthub">在github中查看代码</string>
     <string name="reportBtn">反馈问题</string>
+    <string name="backupBtn">备份</string>
+    <string name="restoreBtn">恢复</string>
+    <string name="restoreHint">文件必须存放在根目录下</string>
     <string name="error1">信息不能为空</string>
     <string name="error2">用户名已存在</string>
     <string name="error3">用户名或密码错误</string>
@@ -31,6 +34,7 @@
     <string name="success1">注册成功! 去登录</string>
     <string name="success2">登录成功</string>
     <string name="success3">修改成功! 去登录</string>
+    <string name="success4">备份成功, 存储在:</string>
     <string name="info1">欢迎回来 </string>
     <string name="info2">你输入的信息为:</string>
     <string name="info3">确认删除?</string>
@@ -67,7 +71,8 @@
         <item>wechat</item>
         <item>blizzard</item>
         <item>Steam</item>
-        <item>other</item>
+        <item>Netease</item>
+        <item>其他</item>
     </string-array>
     <string-array name="numberCode">
         <item>+1</item>

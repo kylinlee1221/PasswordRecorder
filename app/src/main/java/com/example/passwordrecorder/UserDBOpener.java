@@ -24,6 +24,7 @@ public class UserDBOpener extends SQLiteOpenHelper {
     public final static String COL_ID="_ID";
     public final static String COL_OPEN_ACCOUNT="accuser";
     public final static String COL_OTHER_INFO="otherInfo";
+    private String Drop_SQL="DROP TABLE IF EXISTS "+Table_Name;
     //public final static String COL_OPEN_PASSWORD="accPass";
     private SQLiteDatabase db;
 
@@ -97,5 +98,32 @@ public class UserDBOpener extends SQLiteOpenHelper {
 
         }
         return list;
+    }
+    public ArrayList<AllInfo> getAllData(){
+        ArrayList<AllInfo> list=new ArrayList<AllInfo>();
+        if(db!=null){
+            Cursor cursor=db.rawQuery("select * from InfoTable",new String[]{});
+            if(cursor.moveToFirst()){
+                do{
+                    if(cursor.getColumnIndex(COL_ID)!=-1&&cursor.getColumnIndex(COL_User)!=-1&&cursor.getColumnIndex(COL_Pass)!=-1&&cursor.getColumnIndex(COL_Website)!=-1&&cursor.getColumnIndex(COL_SEC)!=-1&&cursor.getColumnIndex(COL_OPEN_ACCOUNT)!=-1&&cursor.getColumnIndex(COL_OTHER_INFO)!=-1){
+                        String userDT=cursor.getString(cursor.getColumnIndex(COL_User));
+                        String passDT=cursor.getString(cursor.getColumnIndex(COL_Pass));
+                        String secDT=cursor.getString(cursor.getColumnIndex(COL_SEC));
+                        String openDT=cursor.getString(cursor.getColumnIndex(COL_OPEN_ACCOUNT));
+                        String otherDT=cursor.getString(cursor.getColumnIndex(COL_OTHER_INFO));
+                        String webDT=cursor.getString(cursor.getColumnIndex(COL_Website));
+                        long idDT=cursor.getLong(cursor.getColumnIndex(COL_ID));
+                        list.add(new AllInfo(userDT,passDT,secDT,webDT,otherDT,openDT,idDT));
+
+                    }
+                }while(cursor.moveToNext());
+                cursor.close();
+            }
+        }
+        return list;
+    }
+    public void dropTB(){
+        db.execSQL(Drop_SQL);
+        onCreate(db);
     }
 }

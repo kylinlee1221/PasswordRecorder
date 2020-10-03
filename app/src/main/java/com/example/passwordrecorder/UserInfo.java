@@ -11,7 +11,9 @@ public class UserInfo {
         this.secPhone=secPhone;
         this.otherInfo=otherInfo;
     }
+    public UserInfo(){
 
+    }
     public String getWebsite() {
         return website;
     }

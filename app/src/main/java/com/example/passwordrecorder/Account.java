@@ -3,9 +3,14 @@ package com.example.passwordrecorder;
 public class Account {
     private String name;            //用户名
     private String password;        //密码
-    public Account(String name, String password) {
+    long id;
+    public Account(String name, String password,long id) {
         this.name = name;
         this.password = password;
+        this.id=id;
+    }
+    public Account(){
+
     }
     public String getName() {
         return name;
@@ -16,6 +21,15 @@ public class Account {
     public String getPassword() {
         return password;
     }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getId() {
+        return id;
+    }
+
     public void setPassword(String password) {
         this.password = password;
     }

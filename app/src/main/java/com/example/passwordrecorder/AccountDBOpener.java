@@ -11,7 +11,11 @@ public class AccountDBOpener extends SQLiteOpenHelper {
     private SQLiteDatabase db;
     protected final static String DB_Name="LoginInfo";
     protected final static int V=1;
-    public final static String Table_Name="LoginTable";
+    public final static String Table_Name="user";
+    public final static String COL_ID="_id";
+    public final static String COL_USER="user";
+    public final static String COL_Pass="password";
+    private String Drop_SQL="DROP TABLE IF EXISTS user";
     public AccountDBOpener(Context cnt){
         super(cnt,DB_Name,null,V);
         db=getReadableDatabase();
@@ -46,8 +50,13 @@ public class AccountDBOpener extends SQLiteOpenHelper {
         while(cursor.moveToNext()){
             String name = cursor.getString(cursor.getColumnIndex("name"));
             String password = cursor.getString(cursor.getColumnIndex("password"));
-            list.add(new Account(name,password));
+            long id=cursor.getLong(cursor.getColumnIndex("_id"));
+            list.add(new Account(name,password,id));
         }
         return list;
+    }
+    public void dropTB(){
+        db.execSQL(Drop_SQL);
+        onCreate(db);
     }
 }

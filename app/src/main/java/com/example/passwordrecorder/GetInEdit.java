@@ -111,7 +111,7 @@ public class GetInEdit extends AppCompatActivity {
                 phoneCode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        phoneSelect[0] = phoneCodeList[position];
+                        //phoneSelect[0] = phoneCodeList[position];
                         secET.addTextChangedListener(new TextWatcher() {
                             @Override
                             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -279,6 +279,14 @@ public class GetInEdit extends AppCompatActivity {
                 Toast.makeText(this, getResources().getString(R.string.aboutUs), Toast.LENGTH_SHORT).show();
                 //finish();
                 break;
+            case R.id.backupRestore:
+                Intent intent1=new Intent(this,Backup.class);
+                startActivity(intent1);
+                Toast.makeText(this,"backup",Toast.LENGTH_LONG).show();
+            case R.id.restore:
+                Intent intent2=new Intent(this,Restore.class);
+                startActivity(intent2);
+                Toast.makeText(this,"restore",Toast.LENGTH_LONG).show();
             default:
                 break;
         }
