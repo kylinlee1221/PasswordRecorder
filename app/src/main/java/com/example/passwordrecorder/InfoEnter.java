@@ -305,10 +305,12 @@ public class InfoEnter extends AppCompatActivity {
                 Intent intent1=new Intent(this,Backup.class);
                 startActivity(intent1);
                 Toast.makeText(this,"backup",Toast.LENGTH_LONG).show();
+                break;
             case R.id.restore:
                 Intent intent2=new Intent(this,Restore.class);
                 startActivity(intent2);
                 Toast.makeText(this,"restore",Toast.LENGTH_LONG).show();
+                break;
             default:
                 break;
         }
