@@ -6,10 +6,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Backup">
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/dbInfo"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/backupBtn2"
         android:text="@string/backupBtn"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/backupFileInfo"
+        />
 </LinearLayout>

@@ -78,7 +78,7 @@ public class GetInEdit extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //Toast.makeText(InfoEnter.this,"The website you chose is "+list[position],Toast.LENGTH_LONG).show();
                 websiteSelect[0] =list[position];
-                if(list[position].equals("other")){
+                if(list[position].equals("other")||list[position].equals("其它")){
                     webET.setVisibility(View.VISIBLE);
                     //websiteET.setInputType(View.TEXT_ALIGNMENT_CENTER);
                     webET.addTextChangedListener(new TextWatcher() {
@@ -98,7 +98,7 @@ public class GetInEdit extends AppCompatActivity {
                         }
                     });
                 }else{
-                    webET.setVisibility(View.INVISIBLE);
+                    webET.setVisibility(View.GONE);
                 }
             }
 

@@ -37,8 +37,8 @@ public class FindPassword extends AppCompatActivity {
         check=(Button)findViewById(R.id.checkBtn);
         change=(Button)findViewById(R.id.changeBtn);
         passHint=findViewById(R.id.passHint);
-        pass.setVisibility(View.INVISIBLE);
-        passHint.setVisibility(View.INVISIBLE);
+        pass.setVisibility(View.GONE);
+        passHint.setVisibility(View.GONE);
         check.setOnClickListener(click->{
             if(!user.getText().toString().equals("")){
                 ArrayList<Account> data=opener.getAllData();
@@ -51,7 +51,7 @@ public class FindPassword extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 checkFlag[0] =true;
-                                check.setVisibility(View.INVISIBLE);
+                                check.setVisibility(View.GONE);
                                 change.setVisibility(View.VISIBLE);
                                 pass.setVisibility(View.VISIBLE);
                                 passHint.setVisibility(View.VISIBLE);

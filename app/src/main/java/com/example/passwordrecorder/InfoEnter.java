@@ -86,7 +86,7 @@ public class InfoEnter extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 websiteSelect[0] =list[position];
-                if(list[position].equals("other")){
+                if(list[position].equals("other")||list[position].equals("其它")){
                     websiteET.setVisibility(View.VISIBLE);
                     //websiteET.setInputType(View.TEXT_ALIGNMENT_CENTER);
                     websiteET.addTextChangedListener(new TextWatcher() {
@@ -106,7 +106,7 @@ public class InfoEnter extends AppCompatActivity {
                         }
                     });
                 }else{
-                    websiteET.setVisibility(View.INVISIBLE);
+                    websiteET.setVisibility(View.GONE);
                 }
             }
 

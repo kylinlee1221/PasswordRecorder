@@ -40,6 +40,10 @@
     <string name="info4">Check Successed</string>
     <string name="info5">Are you sure you want to edit this?</string>
     <string name="info6">Are you sure you want to add this?</string>
+    <string name="info7">Last time you backup is:</string>
+    <string name="info8">No backup found</string>
+    <string name="info9">You have: </string>
+    <string name="info10">info in db</string>
     <string name="exit1">Press another back to exit</string>
     <string name="infoUser">Username:</string>
     <string name="infoPwd">Password:</string>

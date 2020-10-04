@@ -41,6 +41,10 @@
     <string name="info4">检查成功</string>
     <string name="info5">确认修改?</string>
     <string name="info6">确认添加?</string>
+    <string name="info7">上次备份时间:</string>
+    <string name="info8">未发现备份</string>
+    <string name="info9">你有: </string>
+    <string name="info10">条信息在数据库中</string>
     <string name="exit1">再按一次退出</string>
     <string name="infoUser">用户名:</string>
     <string name="infoPwd">密码:</string>
@@ -72,7 +76,7 @@
         <item>blizzard</item>
         <item>Steam</item>
         <item>Netease</item>
-        <item>其他</item>
+        <item>其它</item>
     </string-array>
     <string-array name="numberCode">
         <item>+1</item>

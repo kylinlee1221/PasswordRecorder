@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/registerWeb"
         android:entries="@array/website"
-        android:spinnerMode="dialog"
+        android:spinnerMode="dropdown"
         android:prompt="@string/registerInfo"
         android:textAlignment="center"
 
@@ -54,7 +54,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="invisible"
+        android:visibility="gone"
         android:id="@+id/webEnter"
         android:inputType="text"
         />

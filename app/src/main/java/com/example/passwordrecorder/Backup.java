@@ -8,12 +8,15 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
 import android.view.KeyEvent;
+import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -21,7 +24,9 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Backup extends AppCompatActivity {
 
@@ -30,46 +35,75 @@ public class Backup extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_backup);
         Button backupBtn=findViewById(R.id.backupBtn2);
+        backupBtn.setVisibility(View.GONE);
         AccountDBOpener opener=new AccountDBOpener(this);
         UserDBOpener opener1=new UserDBOpener(this);
-
+        TextView fileTV=findViewById(R.id.backupFileInfo);
+        TextView dbInfo=findViewById(R.id.dbInfo);
+        dbInfo.setVisibility(View.GONE);
         ArrayList<Account> accounts=new ArrayList<Account>();
         accounts=opener.getAllData();
         ArrayList<AllInfo> allInfos=new ArrayList<AllInfo>();
         allInfos=opener1.getAllData();
         ArrayList<Account> finalAccounts = accounts;
         ArrayList<AllInfo> finalAllInfos = allInfos;
+        if(accounts.size()!=0&&allInfos.size()!=0){
+            dbInfo.setVisibility(View.VISIBLE);
+
+            dbInfo.setText(getResources().getString(R.string.info9)+accounts.size()+"+"+allInfos.size()+getResources().getString(R.string.info10));
+            dbInfo.setTextColor(Color.GREEN);
+            backupBtn.setVisibility(View.VISIBLE);
+        }else{
+            dbInfo.setVisibility(View.VISIBLE);
+            dbInfo.setText(R.string.error4);
+            dbInfo.setTextColor(Color.RED);
+            //dbInfo.setTextSize((float) 8.0);
+            backupBtn.setVisibility(View.GONE);
+        }
         requestPermissions();
+        File xlsFile=new File(Environment.getExternalStorageDirectory(),"InfoBackup.xls");
+        if(xlsFile.exists()){
+            String time=new SimpleDateFormat("yyyy-MM-dd").format(new Date(xlsFile.lastModified()));
+            fileTV.setText(getResources().getString(R.string.info7)+time);
+        }else{
+            fileTV.setText(getResources().getString(R.string.info8));
+        }
         backupBtn.setOnClickListener(click->{
             HSSFWorkbook workbook=new HSSFWorkbook();
             HSSFSheet sheet=workbook.createSheet(opener.Table_Name);
             HSSFSheet sheet1=workbook.createSheet(opener1.Table_Name);
             createExcelHead(sheet);
-            for(Account account: finalAccounts){
-                createCell(account.getId(),account.getName(),account.getPassword(),sheet);
-            }
-            createExcelHead1(sheet1);
-            for(AllInfo allInfo: finalAllInfos){
-                createCell1(allInfo.getUserId(),allInfo.getUsername(),allInfo.getPassword(),allInfo.getSecPhone(),allInfo.getWebsite(),allInfo.getOtherInfo(),allInfo.getAccUser(),sheet1);
-            }
-            File xlsFile=new File(Environment.getExternalStorageDirectory(),"InfoBackup.xls");
-            try{
-                if(!xlsFile.exists()){
-                    if(xlsFile.createNewFile()){
-                        Toast.makeText(this,getResources().getString(R.string.success4)+xlsFile.getAbsolutePath(),Toast.LENGTH_LONG).show();
-                    }
-                }else{
-                    boolean flag=xlsFile.delete();
-                    if(flag){
-                        if(xlsFile.createNewFile()){
-                            Toast.makeText(this,getResources().getString(R.string.success4)+xlsFile.getAbsolutePath(),Toast.LENGTH_LONG).show();
+            if(finalAccounts.size()!=0&&finalAllInfos.size()!=0) {
+                for (Account account : finalAccounts) {
+                    createCell(account.getId(), account.getName(), account.getPassword(), sheet);
+                }
+                createExcelHead1(sheet1);
+                for (AllInfo allInfo : finalAllInfos) {
+                    createCell1(allInfo.getUserId(), allInfo.getUsername(), allInfo.getPassword(), allInfo.getSecPhone(), allInfo.getWebsite(), allInfo.getOtherInfo(), allInfo.getAccUser(), sheet1);
+                }
+                //File xlsFile=new File(Environment.getExternalStorageDirectory(),"InfoBackup.xls");
+                try {
+                    if (!xlsFile.exists()) {
+                        if (xlsFile.createNewFile()) {
+                            Toast.makeText(this, getResources().getString(R.string.success4) + xlsFile.getAbsolutePath(), Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        boolean flag = xlsFile.delete();
+                        if (flag) {
+                            if (xlsFile.createNewFile()) {
+                                Toast.makeText(this, getResources().getString(R.string.success4) + xlsFile.getAbsolutePath(), Toast.LENGTH_LONG).show();
+                                String time=new SimpleDateFormat("yyyy-MM-dd").format(new Date(xlsFile.lastModified()));
+                                fileTV.setText(getResources().getString(R.string.info7)+time);
+                            }
                         }
                     }
+                    workbook.write(xlsFile);
+                    workbook.close();
+                } catch (Exception e) {
+                    Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
                 }
-                workbook.write(xlsFile);
-                workbook.close();
-            }catch (Exception e){
-                Toast.makeText(this,e.toString(),Toast.LENGTH_LONG).show();
+            }else{
+                Toast.makeText(this,getResources().getString(R.string.error4),Toast.LENGTH_LONG).show();
             }
         });
 
