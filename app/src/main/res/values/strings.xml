@@ -33,6 +33,7 @@
     <string name="error5">Wrong username</string>
     <string name="error6">Wrong securityCode</string>
     <string name="error7">Old password can\'t be same with new password</string>
+    <string name="error8">No backup file found.</string>
     <string name="success1">Register complete! Go to Login</string>
     <string name="success2">Login successfully</string>
     <string name="success3">Change success! Go to Login</string>
@@ -47,6 +48,7 @@
     <string name="info8">No backup found</string>
     <string name="info9">You have: </string>
     <string name="info10">info in db</string>
+    <string name="info11">Restore completed,Go to login</string>
     <string name="exit1">Press another back to exit</string>
     <string name="infoUser">Username:</string>
     <string name="infoPwd">Password:</string>

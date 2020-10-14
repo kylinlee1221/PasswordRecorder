@@ -34,6 +34,7 @@
     <string name="error5">用户名错误</string>
     <string name="error6">验证码错误</string>
     <string name="error7">旧密码不能与新密码相同</string>
+    <string name="error8">没有找到备份文件</string>
     <string name="success1">注册成功! 去登录</string>
     <string name="success2">登录成功</string>
     <string name="success3">修改成功! 去登录</string>
@@ -48,6 +49,7 @@
     <string name="info8">未发现备份</string>
     <string name="info9">你有: </string>
     <string name="info10">条信息在数据库中</string>
+    <string name="info11">恢复成功，去登录</string>
     <string name="exit1">再按一次退出</string>
     <string name="infoUser">用户名:</string>
     <string name="infoPwd">密码:</string>

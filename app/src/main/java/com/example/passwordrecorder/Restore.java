@@ -19,7 +19,9 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -43,14 +45,28 @@ public class Restore extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restore);
         Button restore=findViewById(R.id.restoreBtn2);
+        TextView restoreHint=findViewById(R.id.restoreHint);
         requestPermissions();
+        File xlsFile=new File(Environment.getExternalStorageDirectory(),"InfoBackup.xls");
+        if(!xlsFile.exists()){
+            restore.setVisibility(View.GONE);
+            restoreHint.setText(R.string.error8);
+            Toast.makeText(this,getResources().getString(R.string.error8),Toast.LENGTH_LONG).show();
+        }else{
+            restore.setVisibility(View.VISIBLE);
+            restoreHint.setText(R.string.restoreHint);
+        }
         restore.setOnClickListener(click->{
-            File xlsFile=new File(Environment.getExternalStorageDirectory(),"InfoBackup.xls");
+
             try{
                 if(!xlsFile.exists()){
-                    Toast.makeText(this,"This is not backup data",Toast.LENGTH_LONG).show();
+                    Toast.makeText(this,getResources().getString(R.string.error8),Toast.LENGTH_LONG).show();
                 }else{
                     readExcel(xlsFile.getAbsolutePath());
+                    Toast.makeText(this,getResources().getString(R.string.info11),Toast.LENGTH_LONG).show();
+                    Intent intent=new Intent(this,MainActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
             }catch (Exception e){
                 Toast.makeText(this,e.toString(),Toast.LENGTH_LONG).show();
@@ -67,7 +83,7 @@ public class Restore extends AppCompatActivity {
             if(excelPath.contains(".xls")){
                 readExcel(excelPath);
             }else{
-                Toast.makeText(this,"This is not backup data",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,getResources().getString(R.string.error8),Toast.LENGTH_LONG).show();
             }
         }
         super.onActivityResult(requestCode, resultCode, data);

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -30,6 +31,7 @@ import java.util.Locale;
 public class SearchPage extends AppCompatActivity {
 
     private ArrayList<UserInfo> infoList=new ArrayList<UserInfo>();
+    private ArrayList<UserInfo> allInfo=new ArrayList<UserInfo>();
     String[] list;
     String[] weblist;
     String[] phonelist;
@@ -53,6 +55,7 @@ public class SearchPage extends AppCompatActivity {
         EditText userInput=findViewById(R.id.userInput),phoneInput=findViewById(R.id.phoneEnter3);
         Spinner searchByWhat=findViewById(R.id.searchBy),website=findViewById(R.id.webSelected),phone=findViewById(R.id.phoneCode3);
         Button search=findViewById(R.id.searchBtn),back=findViewById(R.id.BtnBackToFront2);
+        TextView searchHint=findViewById(R.id.searchHint);
         UserDBOpener opener=new UserDBOpener(this);
         list=getResources().getStringArray(R.array.searchByWhat).clone();
         weblist=getResources().getStringArray(R.array.website).clone();
@@ -63,6 +66,23 @@ public class SearchPage extends AppCompatActivity {
         phoneSelect[0]="empty3";
         final int[] selectedSearch=new int[1];
         String finalAccUser = accUser;
+        allInfo=opener.getUserData(finalAccUser);
+        if(allInfo.size()==0){
+            search.setVisibility(View.GONE);
+            userInput.setVisibility(View.GONE);
+            searchByWhat.setVisibility(View.GONE);
+            searchList.setVisibility(View.GONE);
+            searchHint.setText(R.string.error4);
+            searchHint.setTextColor(Color.RED);
+            Toast.makeText(SearchPage.this,getResources().getString(R.string.error4),Toast.LENGTH_LONG).show();
+        }else{
+            search.setVisibility(View.VISIBLE);
+            userInput.setVisibility(View.VISIBLE);
+            searchByWhat.setVisibility(View.VISIBLE);
+            searchList.setVisibility(View.VISIBLE);
+            searchHint.setText(R.string.searchBy);
+            searchHint.setTextColor(Color.BLACK);
+        }
         searchByWhat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -165,7 +185,7 @@ public class SearchPage extends AppCompatActivity {
                     searchList.setSelection(adapter.getCount() - 1);
                     adapter.notifyDataSetChanged();
                 }else{
-                    Toast.makeText(SearchPage.this,getResources().getString(R.string.error3),Toast.LENGTH_LONG).show();
+                    Toast.makeText(SearchPage.this,getResources().getString(R.string.error4),Toast.LENGTH_LONG).show();
                 }
             }else if(selectedSearch[0]==0){
                 infoList.clear();
@@ -177,13 +197,16 @@ public class SearchPage extends AppCompatActivity {
                         searchList.setSelection(adapter.getCount()-1);
                         adapter.notifyDataSetChanged();
                     }else{
-                        Toast.makeText(SearchPage.this,getResources().getString(R.string.error3),Toast.LENGTH_LONG).show();
+                        Toast.makeText(SearchPage.this,getResources().getString(R.string.error4),Toast.LENGTH_LONG).show();
                     }
                 }else{
                     Toast.makeText(SearchPage.this,getResources().getString(R.string.error1),Toast.LENGTH_LONG).show();
                 }
 
             }else if(selectedSearch[0]==2){
+                if(phoneInput.getText().toString().equals("")||phoneInput.getText().toString()==null){
+                    phoneSelect[0]="empty3";
+                }
                 if(!phoneSelect[0].equals("")) {
                     infoList.clear();
                     infoList=opener.getUserDataByPhone(phoneSelect[0],finalAccUser);
@@ -193,13 +216,18 @@ public class SearchPage extends AppCompatActivity {
                         searchList.setSelection(adapter.getCount()-1);
                         adapter.notifyDataSetChanged();
                     }else{
-                        Toast.makeText(SearchPage.this,getResources().getString(R.string.error3),Toast.LENGTH_LONG).show();
+                        Toast.makeText(SearchPage.this,getResources().getString(R.string.error4),Toast.LENGTH_LONG).show();
                     }
                 }else{
                     Toast.makeText(SearchPage.this,getResources().getString(R.string.error1),Toast.LENGTH_LONG).show();
                 }
 
             }
+        });
+        back.setOnClickListener(click->{
+            Intent intent=new Intent(this,StartPage.class);
+            startActivity(intent);
+            finish();
         });
     }
     protected class MyAdapter extends BaseAdapter {
