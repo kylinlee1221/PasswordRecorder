@@ -45,10 +45,11 @@ public class StartPage extends AppCompatActivity {
             showUser.setText(getResources().getString(R.string.info1) + " " + userFrom);
             showUser.setTextColor(Color.RED);
         }
-        Button add,show,logout;
+        Button add,show,logout,search;
         add=(Button) findViewById(R.id.addPassword);
         show=(Button)findViewById(R.id.checkInfo);
         logout=(Button)findViewById(R.id.backToMain);
+        search=(Button)findViewById(R.id.goSearch);
         if(add!=null){
             String finalUserFrom = userFrom;
             add.setOnClickListener(click->{
@@ -86,6 +87,15 @@ public class StartPage extends AppCompatActivity {
                 Intent edit = new Intent(this, EditInfo.class);
                 edit.putExtra("accUser", finalUserFrom);
                 startActivity(edit);
+                finish();
+            });
+        }
+        if(search!=null){
+            String finalUserFrom=userFrom;
+            search.setOnClickListener(click->{
+                Intent intent=new Intent(this,SearchPage.class);
+                intent.putExtra("accUser",finalUserFrom);
+                startActivity(intent);
                 finish();
             });
         }

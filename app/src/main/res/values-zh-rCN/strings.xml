@@ -24,6 +24,9 @@
     <string name="backupBtn">备份</string>
     <string name="restoreBtn">恢复</string>
     <string name="restoreHint">文件必须存放在根目录下</string>
+    <string name="searchBtn">搜索信息</string>
+    <string name="searchBy">用什么搜索:</string>
+    <string name="searchHint">在此输入</string>
     <string name="error1">信息不能为空</string>
     <string name="error2">用户名已存在</string>
     <string name="error3">用户名或密码错误</string>
@@ -82,5 +85,10 @@
         <item>+1</item>
         <item>+86</item>
         <item>+852</item>
+    </string-array>
+    <string-array name="searchByWhat">
+        <item>用户名</item>
+        <item>网站</item>
+        <item>安全手机</item>
     </string-array>
 </resources>

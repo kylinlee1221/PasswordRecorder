@@ -23,6 +23,9 @@
     <string name="backupBtn">Click here to backup</string>
     <string name="restoreBtn">click here to restore</string>
     <string name="restoreHint">File must exist in root directory</string>
+    <string name="searchBtn">Click here to search</string>
+    <string name="searchBy">SearchBy:</string>
+    <string name="searchHint">Input here</string>
     <string name="error1">Please enter info</string>
     <string name="error2">Exist username, change it.</string>
     <string name="error3">Wrong info</string>
@@ -81,5 +84,10 @@
         <item>+1</item>
         <item>+86</item>
         <item>+852</item>
+    </string-array>
+    <string-array name="searchByWhat">
+        <item>username</item>
+        <item>website</item>
+        <item>security phone</item>
     </string-array>
 </resources>

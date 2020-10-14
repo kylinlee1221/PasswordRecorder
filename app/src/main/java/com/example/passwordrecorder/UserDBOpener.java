@@ -122,6 +122,81 @@ public class UserDBOpener extends SQLiteOpenHelper {
         }
         return list;
     }
+    public ArrayList<UserInfo> getUserDataByWeb(String website,String accUser){
+        ArrayList<UserInfo> list=new ArrayList<UserInfo>();
+        if(db!=null){
+            Cursor cursor=db.rawQuery("select * from InfoTable where website = ? and accuser = ?",new String[]{website,accUser});
+            if(cursor.moveToFirst()){
+                do{
+                    if(cursor.getColumnIndex(COL_Website)!=-1&&cursor.getColumnIndex(COL_User)!=-1&&cursor.getColumnIndex(COL_ID)!=-1&&cursor.getColumnIndex(COL_Pass)!=-1&&cursor.getColumnIndex(COL_SEC)!=-1&&cursor.getColumnIndex(COL_OPEN_ACCOUNT)!=-1&&cursor.getColumnIndex(COL_OTHER_INFO)!=-1) {
+                        String userDT = cursor.getString(cursor.getColumnIndex(COL_User));
+                        String passDT = cursor.getString(cursor.getColumnIndex(COL_Pass));
+                        String secDT = cursor.getString(cursor.getColumnIndex(COL_SEC));
+                        String webDT = cursor.getString(cursor.getColumnIndex(COL_Website));
+                        long idDT = cursor.getLong(cursor.getColumnIndex(COL_ID));
+                        String otherDT=cursor.getString(cursor.getColumnIndex(COL_OTHER_INFO));
+                        list.add(new UserInfo(userDT, passDT, webDT, secDT, idDT,otherDT));
+                        //adapter = new Info.MyAdapter();
+                        //myList.setAdapter(adapter);
+                        //myList.setSelection(adapter.getCount() - 1);
+                        //adapter.notifyDataSetChanged();
+                    }
+                }while(cursor.moveToNext());
+                cursor.close();
+            }
+        }
+        return list;
+    }
+    public ArrayList<UserInfo> getUserDataByUser(String username,String accUser){
+        ArrayList<UserInfo> list=new ArrayList<UserInfo>();
+        if(db!=null){
+            Cursor cursor=db.rawQuery("select * from InfoTable where username = ? and accuser = ?",new String[]{username,accUser});
+            if(cursor.moveToFirst()){
+                do{
+                    if(cursor.getColumnIndex(COL_Website)!=-1&&cursor.getColumnIndex(COL_User)!=-1&&cursor.getColumnIndex(COL_ID)!=-1&&cursor.getColumnIndex(COL_Pass)!=-1&&cursor.getColumnIndex(COL_SEC)!=-1&&cursor.getColumnIndex(COL_OPEN_ACCOUNT)!=-1&&cursor.getColumnIndex(COL_OTHER_INFO)!=-1) {
+                        String userDT = cursor.getString(cursor.getColumnIndex(COL_User));
+                        String passDT = cursor.getString(cursor.getColumnIndex(COL_Pass));
+                        String secDT = cursor.getString(cursor.getColumnIndex(COL_SEC));
+                        String webDT = cursor.getString(cursor.getColumnIndex(COL_Website));
+                        long idDT = cursor.getLong(cursor.getColumnIndex(COL_ID));
+                        String otherDT=cursor.getString(cursor.getColumnIndex(COL_OTHER_INFO));
+                        list.add(new UserInfo(userDT, passDT, webDT, secDT, idDT,otherDT));
+                        //adapter = new Info.MyAdapter();
+                        //myList.setAdapter(adapter);
+                        //myList.setSelection(adapter.getCount() - 1);
+                        //adapter.notifyDataSetChanged();
+                    }
+                }while(cursor.moveToNext());
+                cursor.close();
+            }
+        }
+        return list;
+    }
+    public ArrayList<UserInfo> getUserDataByPhone(String secPhone,String accUser){
+        ArrayList<UserInfo> list=new ArrayList<UserInfo>();
+        if(db!=null){
+            Cursor cursor=db.rawQuery("select * from InfoTable where securityPhone = ? and accuser = ?",new String[]{secPhone,accUser});
+            if(cursor.moveToFirst()){
+                do{
+                    if(cursor.getColumnIndex(COL_Website)!=-1&&cursor.getColumnIndex(COL_User)!=-1&&cursor.getColumnIndex(COL_ID)!=-1&&cursor.getColumnIndex(COL_Pass)!=-1&&cursor.getColumnIndex(COL_SEC)!=-1&&cursor.getColumnIndex(COL_OPEN_ACCOUNT)!=-1&&cursor.getColumnIndex(COL_OTHER_INFO)!=-1) {
+                        String userDT = cursor.getString(cursor.getColumnIndex(COL_User));
+                        String passDT = cursor.getString(cursor.getColumnIndex(COL_Pass));
+                        String secDT = cursor.getString(cursor.getColumnIndex(COL_SEC));
+                        String webDT = cursor.getString(cursor.getColumnIndex(COL_Website));
+                        long idDT = cursor.getLong(cursor.getColumnIndex(COL_ID));
+                        String otherDT=cursor.getString(cursor.getColumnIndex(COL_OTHER_INFO));
+                        list.add(new UserInfo(userDT, passDT, webDT, secDT, idDT,otherDT));
+                        //adapter = new Info.MyAdapter();
+                        //myList.setAdapter(adapter);
+                        //myList.setSelection(adapter.getCount() - 1);
+                        //adapter.notifyDataSetChanged();
+                    }
+                }while(cursor.moveToNext());
+                cursor.close();
+            }
+        }
+        return list;
+    }
     public void dropTB(){
         db.execSQL(Drop_SQL);
         onCreate(db);
