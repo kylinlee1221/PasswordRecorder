@@ -37,6 +37,7 @@ public class Info extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
         ListView myList=(ListView)findViewById(R.id.infoList);
+        TextView hint=findViewById(R.id.infoHint);
         UserDBOpener opener=new UserDBOpener(this);
         Intent fromLast=getIntent();
         String username=fromLast.getStringExtra("username");
@@ -54,81 +55,23 @@ public class Info extends AppCompatActivity {
             shared=getSharedPreferences("username",MODE_PRIVATE);
             accUser=shared.getString("username","");
         }
-        String[] cols={opener.COL_ID,opener.COL_User,opener.COL_Pass,opener.COL_SEC,opener.COL_Website};
-        /*if(accUser!=null) {
-            if (db != null) {
-                Cursor cursor = db.rawQuery("select * from InfoTable where accuser = ?", new String[]{accUser});
-                if(cursor.moveToFirst()){
-                    do{
-                        if(cursor.getColumnIndex(opener.COL_Website)!=-1&&cursor.getColumnIndex(opener.COL_User)!=-1&&cursor.getColumnIndex(opener.COL_ID)!=-1&&cursor.getColumnIndex(opener.COL_Pass)!=-1&&cursor.getColumnIndex(opener.COL_SEC)!=-1&&cursor.getColumnIndex(opener.COL_OPEN_ACCOUNT)!=-1) {
-                            String userDT = cursor.getString(cursor.getColumnIndex(opener.COL_User));
-                            String passDT = cursor.getString(cursor.getColumnIndex(opener.COL_Pass));
-                            String secDT = cursor.getString(cursor.getColumnIndex(opener.COL_SEC));
-                            String webDT = cursor.getString(cursor.getColumnIndex(opener.COL_Website));
-                            long idDT = cursor.getLong(cursor.getColumnIndex(opener.COL_ID));
-                            infoList.add(new UserInfo(userDT, passDT, webDT, secDT, idDT));
-                            adapter = new MyAdapter();
-                            myList.setAdapter(adapter);
-                            myList.setSelection(adapter.getCount() - 1);
-                            adapter.notifyDataSetChanged();
-                        }
-                    }while(cursor.moveToNext());
-                    cursor.close();
-                }
-            }else{
-                Toast.makeText(this,getResources().getString(R.string.error4),Toast.LENGTH_LONG).show();
-            }
-
-        }*/
-
-        /*Cursor results=db.query(false,opener.Table_Name,cols,opener.COL_OPEN_ACCOUNT+"=?",new String[]{accUser},null,null,null,null);
-        int idCID=results.getColumnIndex(opener.COL_ID);
-        int userCID=results.getColumnIndex(opener.COL_User);
-        int passCID=results.getColumnIndex(opener.COL_Pass);
-        int secCID=results.getColumnIndex(opener.COL_SEC);
-        int webCID=results.getColumnIndex(opener.COL_Website);*/
-
-        /*while(results.moveToNext()){
-            String userDT=results.getString(userCID);
-            String passDT=results.getString(passCID);
-            String secDT=results.getString(secCID);
-            String webDT=results.getString(webCID);
-            long idDT=results.getLong(idCID);
-            infoList.add(new UserInfo(userDT,passDT,webDT,secDT,idDT));
-            adapter=new MyAdapter();
-            myList.setAdapter(adapter);
-            myList.setSelection(adapter.getCount()-1);
-            adapter.notifyDataSetChanged();
-        }*/
 
         if(accUser!=null) {
             infoList = opener.getUserData(accUser);
-            adapter = new MyAdapter();
-            myList.setAdapter(adapter);
-            myList.setSelection(adapter.getCount() - 1);
-            adapter.notifyDataSetChanged();
-        }
-        if (username != null&&password!=null&&secPhone!=null&&website!=null&&accUser!=null) {
-
-            adapter = new MyAdapter();
-            myList.setAdapter(adapter);
-            myList.setSelection(adapter.getCount() - 1);
-            /*ContentValues newRow = new ContentValues();
-            newRow.put(opener.COL_User, username);
-            newRow.put(opener.COL_Pass, password);
-            newRow.put(opener.COL_SEC, secPhone);
-            newRow.put(opener.COL_Website, website);
-            newRow.put(opener.COL_OPEN_ACCOUNT,accUser);
-            long newID = db.insert(opener.Table_Name, null, newRow);
-            //Log.e("db info",db.toString());
-            //Log.e("insert info", String.valueOf(newID));
-            if(newID!=-1) {
-                UserInfo newInfo = new UserInfo(username, password, website, secPhone, newID);
-                infoList.add(newInfo);
-            }*/
-            adapter = new MyAdapter();
-            adapter.notifyDataSetChanged();
-            myList.setSelection(adapter.getCount() - 1);
+            if(infoList.size()!=0) {
+                myList.setVisibility(View.VISIBLE);
+                hint.setText(R.string.info12);
+                hint.setTextColor(Color.BLACK);
+                adapter = new MyAdapter();
+                myList.setAdapter(adapter);
+                myList.setSelection(adapter.getCount() - 1);
+                adapter.notifyDataSetChanged();
+            }else{
+                myList.setVisibility(View.GONE);
+                hint.setText(R.string.error4);
+                hint.setTextColor(Color.RED);
+                Toast.makeText(this,getResources().getString(R.string.error4),Toast.LENGTH_LONG).show();
+            }
         }
 
 

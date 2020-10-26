@@ -6,7 +6,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Info">
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:id="@+id/infoHint"
+        android:text="@string/info12"/>
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -3,6 +3,7 @@ package com.example.passwordrecorder;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -31,6 +33,7 @@ public class Register extends AppCompatActivity {
         EditText passwordReg = (EditText) findViewById(R.id.passwordReg);
         Button registerBtn = (Button) findViewById(R.id.registerBtn);
         Button backBtn=(Button) findViewById(R.id.backBtn);
+        TextView passwordHint=findViewById(R.id.passwordHint);
         backBtn.setOnClickListener(click->{
             Intent intent=new Intent(this,MainActivity.class);
             startActivity(intent);
@@ -63,11 +66,18 @@ public class Register extends AppCompatActivity {
                     Toast.makeText(this,getResources().getString(R.string.error2),Toast.LENGTH_LONG).show();
                 }else{
                     if(realCodeIn.getText().toString().toLowerCase().equals(finalRealCode[0])) {
-                        opener.add(accountReg.getText().toString(), passwordReg.getText().toString());
-                        Intent intent = new Intent(this, MainActivity.class);
-                        startActivity(intent);
-                        Toast.makeText(this, getResources().getString(R.string.success1), Toast.LENGTH_LONG).show();
-                        finish();
+
+                        if(passwordReg.getText().toString().length()<8||passwordReg.getText().toString().length()>16){
+                            passwordHint.setTextColor(Color.RED);
+                            Toast.makeText(this,getResources().getString(R.string.error9),Toast.LENGTH_LONG).show();
+                        }else{
+                            opener.add(accountReg.getText().toString(), passwordReg.getText().toString());
+                            Intent intent = new Intent(this, MainActivity.class);
+                            startActivity(intent);
+                            passwordHint.setTextColor(Color.BLACK);
+                            Toast.makeText(this, getResources().getString(R.string.success1), Toast.LENGTH_LONG).show();
+                            finish();
+                        }
                     }else{
                         Toast.makeText(this,getResources().getString(R.string.error6),Toast.LENGTH_LONG).show();
                         realCodeImg.setImageBitmap(Code.getInstance().createBitmap());

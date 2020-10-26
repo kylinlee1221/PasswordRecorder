@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -32,7 +33,7 @@ public class EditInfo extends AppCompatActivity {
         setContentView(R.layout.activity_edit_info);
         ListView myList=(ListView)findViewById(R.id.infoList2);
         Button back=findViewById(R.id.BtnBackToFront2);
-
+        TextView hint=findViewById(R.id.editHint);
         UserDBOpener opener=new UserDBOpener(this);
         Intent fromLast=getIntent();
         String accUser=fromLast.getStringExtra("accUser");
@@ -47,10 +48,20 @@ public class EditInfo extends AppCompatActivity {
         }
         if(accUser!=null) {
             infoList = opener.getUserData(accUser);
-            adapter = new MyAdapter();
-            myList.setAdapter(adapter);
-            myList.setSelection(adapter.getCount() - 1);
-            adapter.notifyDataSetChanged();
+            if(infoList.size()!=0) {
+                myList.setVisibility(View.VISIBLE);
+                hint.setText(R.string.editHint);
+                hint.setTextColor(Color.BLACK);
+                adapter = new MyAdapter();
+                myList.setAdapter(adapter);
+                myList.setSelection(adapter.getCount() - 1);
+                adapter.notifyDataSetChanged();
+            }else{
+                myList.setVisibility(View.GONE);
+                hint.setText(R.string.error4);
+                hint.setTextColor(Color.RED);
+                Toast.makeText(this,getResources().getString(R.string.error4),Toast.LENGTH_LONG).show();
+            }
         }else if(opener.getUserData(accUser).size()==0){
             Toast.makeText(this,getResources().getString(R.string.error4),Toast.LENGTH_LONG).show();
         }

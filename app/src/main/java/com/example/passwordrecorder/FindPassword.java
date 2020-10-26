@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
@@ -28,7 +29,7 @@ public class FindPassword extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_password);
         EditText user,pass;
-        TextView passHint;
+        TextView passHint,passHint1;
         Button check,change;
         final Boolean[] checkFlag = {false};
         AccountDBOpener opener=new AccountDBOpener(this);
@@ -37,8 +38,10 @@ public class FindPassword extends AppCompatActivity {
         check=(Button)findViewById(R.id.checkBtn);
         change=(Button)findViewById(R.id.changeBtn);
         passHint=findViewById(R.id.passHint);
+        passHint1=findViewById(R.id.passwordHint2);
         pass.setVisibility(View.GONE);
         passHint.setVisibility(View.GONE);
+        passHint1.setVisibility(View.GONE);
         check.setOnClickListener(click->{
             if(!user.getText().toString().equals("")){
                 ArrayList<Account> data=opener.getAllData();
@@ -55,6 +58,7 @@ public class FindPassword extends AppCompatActivity {
                                 change.setVisibility(View.VISIBLE);
                                 pass.setVisibility(View.VISIBLE);
                                 passHint.setVisibility(View.VISIBLE);
+                                passHint1.setVisibility(View.VISIBLE);
                                 pass.setText("");
                             }
                         }).create().show();
@@ -79,11 +83,17 @@ public class FindPassword extends AppCompatActivity {
                     for(int i=0;i<data.size();i++){
                         Account p=data.get(i);
                         if(!p.getPassword().equals(pass.getText().toString())&&p.getName().equals(user.getText().toString())){
-                            opener.update(user.getText().toString(),pass.getText().toString());
-                            Toast.makeText(this,getResources().getString(R.string.success3),Toast.LENGTH_LONG).show();
-                            Intent intent=new Intent(FindPassword.this,MainActivity.class);
-                            startActivity(intent);
-                            finish();
+                            /**/
+                            if(pass.getText().toString().length()<8||pass.getText().toString().length()>16){
+                                passHint1.setTextColor(Color.RED);
+                                Toast.makeText(this,getResources().getString(R.string.error9),Toast.LENGTH_LONG).show();
+                            }else{
+                                opener.update(user.getText().toString(),pass.getText().toString());
+                                Toast.makeText(this,getResources().getString(R.string.success3),Toast.LENGTH_LONG).show();
+                                Intent intent=new Intent(FindPassword.this,MainActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
                         }else if (p.getPassword().equals(pass.getText().toString())&&p.getName().equals(user.getText().toString())){
                             Toast.makeText(this,getResources().getString(R.string.error7),Toast.LENGTH_LONG).show();
                         }

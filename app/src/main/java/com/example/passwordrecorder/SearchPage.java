@@ -96,6 +96,32 @@ public class SearchPage extends AppCompatActivity {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                             webinfo[0] =weblist[position];
+                            if(weblist[position].equals("other")||weblist[position].equals("其它")){
+                                userInput.setVisibility(View.VISIBLE);
+                                userInput.addTextChangedListener(new TextWatcher() {
+                                    @Override
+                                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                                    }
+
+                                    @Override
+                                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                                    }
+
+                                    @Override
+                                    public void afterTextChanged(Editable s) {
+                                        if(userInput.getText().toString()!=null){
+                                            webinfo[0]=weblist[position]+":"+userInput.getText().toString();
+                                        }else{
+                                            Toast.makeText(SearchPage.this,getResources().getString(R.string.error1),Toast.LENGTH_LONG).show();
+                                        }
+                                    }
+                                });
+                            }else{
+                                userInput.setVisibility(View.GONE);
+                                webinfo[0]=weblist[position];
+                            }
                         }
 
                         @Override

@@ -21,11 +21,12 @@
     <string name="checkInGuthub">Go to github</string>
     <string name="reportBtn">report a bug</string>
     <string name="backupBtn">Click here to backup</string>
-    <string name="restoreBtn">click here to restore</string>
+    <string name="restoreBtn">Click here to restore</string>
     <string name="restoreHint">File must exist in root directory</string>
     <string name="searchBtn">Click here to search</string>
     <string name="searchBy">SearchBy:</string>
     <string name="searchHint">Input here</string>
+    <string name="passwordHint">Password must between 8–16 length, type in(eg.abcd,1234,#@!)</string>
     <string name="error1">Please enter info</string>
     <string name="error2">Exist username, change it.</string>
     <string name="error3">Wrong info</string>
@@ -34,6 +35,7 @@
     <string name="error6">Wrong securityCode</string>
     <string name="error7">Old password can\'t be same with new password</string>
     <string name="error8">No backup file found.</string>
+    <string name="error9">Password must have 8–16 values</string>
     <string name="success1">Register complete! Go to Login</string>
     <string name="success2">Login successfully</string>
     <string name="success3">Change success! Go to Login</string>
@@ -49,6 +51,7 @@
     <string name="info9">You have: </string>
     <string name="info10">info in db</string>
     <string name="info11">Restore completed,Go to login</string>
+    <string name="info12">Long click info to delete it</string>
     <string name="exit1">Press another back to exit</string>
     <string name="infoUser">Username:</string>
     <string name="infoPwd">Password:</string>
@@ -60,7 +63,7 @@
     <string name="sureBtn">confirm</string>
     <string name="BackToFront">Click here back to front</string>
     <string name="back">Back to login</string>
-    <string name="returnToLogin">Click here to return</string>
+    <string name="returnToLogin">Click here to logout</string>
     <string name="findPass">Forget password</string>
     <string name="aboutUs">about</string>
     <string name="popAbout">This program is designed by Kylinlee\u00A9 \n And it\'s 100% openSource and free \n You can check the code by click the button to github\n Or report bug by send e-mail to\n 26882137@qq.com</string>
