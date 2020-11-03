@@ -53,6 +53,7 @@
     <string name="info10">条信息在数据库中</string>
     <string name="info11">恢复成功，去登录</string>
     <string name="info12">长按信息来删除</string>
+    <string name="info13">发现备份！备份时间为: </string>
     <string name="exit1">再按一次退出</string>
     <string name="infoUser">用户名:</string>
     <string name="infoPwd">密码:</string>
@@ -77,6 +78,7 @@
         <item>Google</item>
         <item>Facebook</item>
         <item>Outlook</item>
+        <item>Itunes</item>
         <item>Amazon</item>
         <item>QQ</item>
         <item>163mail</item>

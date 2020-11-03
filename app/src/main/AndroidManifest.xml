@@ -21,7 +21,6 @@
         <activity android:name=".SearchPage"></activity>
         <activity android:name=".Restore" />
         <activity android:name=".Backup" />
-        <activity android:name=".BackupRestore" />
         <activity android:name=".GetInEdit" />
         <activity android:name=".EditInfo" />
         <activity android:name=".AboutPage" />

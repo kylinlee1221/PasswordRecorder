@@ -6,11 +6,13 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -36,10 +38,13 @@ import org.apache.poi.ss.usermodel.Row;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 
 public class Restore extends AppCompatActivity {
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,8 +58,11 @@ public class Restore extends AppCompatActivity {
             restoreHint.setText(R.string.error8);
             Toast.makeText(this,getResources().getString(R.string.error8),Toast.LENGTH_LONG).show();
         }else{
+            String time=new SimpleDateFormat("yyyy-MM-dd").format(new Date(xlsFile.lastModified()));
             restore.setVisibility(View.VISIBLE);
-            restoreHint.setText(R.string.restoreHint);
+            //restoreHint.setText(R.string.restoreHint);
+            restoreHint.setTextColor(Color.GREEN);
+            restoreHint.setText(getResources().getString(R.string.info13)+time);
         }
         restore.setOnClickListener(click->{
 

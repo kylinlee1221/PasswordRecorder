@@ -52,6 +52,7 @@
     <string name="info10">info in db</string>
     <string name="info11">Restore completed,Go to login</string>
     <string name="info12">Long click info to delete it</string>
+    <string name="info13">Backup founded! It modified in: </string>
     <string name="exit1">Press another back to exit</string>
     <string name="infoUser">Username:</string>
     <string name="infoPwd">Password:</string>
@@ -76,6 +77,7 @@
         <item>Google</item>
         <item>Facebook</item>
         <item>Outlook</item>
+        <item>Itunes</item>
         <item>Amazon</item>
         <item>QQ</item>
         <item>163mail</item>

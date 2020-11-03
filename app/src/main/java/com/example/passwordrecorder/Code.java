@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class Code {
     private static final char[] CHARS = {
-            '2', '3', '4', '5',  '7', '8',
+            '2', '3', '4', '5',  '7', '8', '9', '1',
             'a',  'd', 'e', 'f', 'g', 'h', 'j', 'k', 'm',
             'n', 'p',  'r', 's',  'u', 'v', 'w', 'x', 'y', 'z',
             'A', 'B',  'D', 'E', 'F',  'H',  'J', 'K', 'M',

@@ -42,6 +42,7 @@
         android:id="@+id/password"
         android:hint="@string/enterPassword"
         android:inputType="textPassword"
+        android:maxLength="16"
         android:drawableRight="@drawable/close"
         android:paddingRight="10dp"
         />
