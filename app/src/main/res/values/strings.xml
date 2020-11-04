@@ -27,6 +27,7 @@
     <string name="searchBy">SearchBy:</string>
     <string name="searchHint">Input here</string>
     <string name="passwordHint">Password must between 8–16 length, type in(eg.abcd,1234,#@!)</string>
+    <string name="rememberPassword">Remember username,password</string>
     <string name="error1">Please enter info</string>
     <string name="error2">Exist username, change it.</string>
     <string name="error3">Wrong info</string>

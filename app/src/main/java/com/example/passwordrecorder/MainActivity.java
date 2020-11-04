@@ -16,6 +16,8 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -28,16 +30,36 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        String username;
+        String username,password;
         Button loginBtn,registerBtn,findBtn;
         EditText userEdit = (EditText) findViewById(R.id.username);
         EditText passEdit=(EditText)findViewById(R.id.password);
         loginBtn = (Button) findViewById(R.id.login);
         registerBtn=(Button)findViewById(R.id.register);
         findBtn=(Button)findViewById(R.id.findPass);
-        //username=userEdit.getText().toString();
+        CheckBox remember=findViewById(R.id.remember);
+        Boolean checkflag;
         SharedPreferences shared = getSharedPreferences("username", MODE_PRIVATE);
         username = shared.getString("username", "");
+        password=shared.getString("password","");
+        remember.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    if(!username.equals("")&&!password.equals("")){
+                        userEdit.setText(username);
+                        passEdit.setText(password);
+                        remember.setChecked(true);
+                    }
+                }
+            }
+        });
+        if(shared.getBoolean("check",false)){
+            userEdit.setText(username);
+            passEdit.setText(password);
+            remember.setChecked(true);
+        }
+        //username=userEdit.getText().toString();
         AccountDBOpener dbOpener=new AccountDBOpener(this);
         registerBtn.setOnClickListener(click->{
             Intent intent=new Intent(this,Register.class);
@@ -48,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
             if (!userEdit.getText().toString().equals("")&&!passEdit.getText().toString().equals("")) {
                 ArrayList<Account> data=dbOpener.getAllData();
                 boolean match=false;
+                boolean check=remember.isChecked();
                 for(int i=0;i<data.size();i++){
                     Account account=data.get(i);
                     if(userEdit.getText().toString().equals(account.getName())&&passEdit.getText().toString().equals(account.getPassword())){
@@ -58,13 +81,33 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 if(match) {
-                    Intent intent = new Intent(this, StartPage.class);
-                    intent.putExtra("typeUsername", userEdit.getText().toString());
-                    intent.putExtra("typePassword",passEdit.getText().toString());
-                    //startActivityForResult(intent, 30);
-                    startActivity(intent);
-                    Toast.makeText(this,getResources().getString(R.string.success2),Toast.LENGTH_LONG).show();
-                    finish();
+                    if(check) {
+                        SharedPreferences.Editor editor=shared.edit();
+                        editor.putString("username",userEdit.getText().toString());
+                        editor.putString("password",passEdit.getText().toString());
+                        editor.putBoolean("check",true);
+                        editor.commit();
+                        Intent intent = new Intent(this, StartPage.class);
+                        intent.putExtra("typeUsername", userEdit.getText().toString());
+                        intent.putExtra("typePassword", passEdit.getText().toString());
+                        //startActivityForResult(intent, 30);
+                        startActivity(intent);
+                        Toast.makeText(this, getResources().getString(R.string.success2), Toast.LENGTH_LONG).show();
+                        finish();
+                    }else{
+                        SharedPreferences.Editor editor=shared.edit();
+                        editor.putString("username","");
+                        editor.putString("password","");
+                        editor.putBoolean("check",false);
+                        editor.commit();
+                        Intent intent = new Intent(this, StartPage.class);
+                        intent.putExtra("typeUsername", userEdit.getText().toString());
+                        intent.putExtra("typePassword", passEdit.getText().toString());
+                        //startActivityForResult(intent, 30);
+                        startActivity(intent);
+                        Toast.makeText(this, getResources().getString(R.string.success2), Toast.LENGTH_LONG).show();
+                        finish();
+                    }
                 }else{
                     Toast.makeText(this,getResources().getString(R.string.error3),Toast.LENGTH_LONG).show();
                 }
