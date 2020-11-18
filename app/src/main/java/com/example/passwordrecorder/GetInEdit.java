@@ -19,6 +19,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -28,6 +29,7 @@ import android.widget.Toast;
 public class GetInEdit extends AppCompatActivity {
     String[] list;
     String[] phoneCodeList;
+    Boolean checkFlag=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,22 +46,24 @@ public class GetInEdit extends AppCompatActivity {
         String password=fromLast.getStringExtra("password");
         String secPhone=fromLast.getStringExtra("secPhone");
         String website=fromLast.getStringExtra("webSite");
+        String otherInfo=fromLast.getStringExtra("otherInfo");
         UserDBOpener opener=new UserDBOpener(this);
         EditText userET,passET,secET,webET,otherET;
         TextView infoSec=findViewById(R.id.secInfo2);
-        Switch secFlag,otherFlag;
+        Switch phoneSW,otherSW;
         Button addBtn2=findViewById(R.id.addBtn2);
         userET=findViewById(R.id.usernameEnter2);
         passET=findViewById(R.id.passwordEnter2);
         secET=findViewById(R.id.phoneEnter2);
         webET=findViewById(R.id.webEnter2);
         otherET=findViewById(R.id.otherInfoEnter2);
-        //secFlag=findViewById(R.id.secSwitch2);
-        //otherFlag=findViewById(R.id.otherInfoSwitch2);
+        phoneSW=findViewById(R.id.phoneSW2);
+        otherSW=findViewById(R.id.otherSW2);
         Spinner webCode=findViewById(R.id.registerWeb2);
         Spinner phoneCode=findViewById(R.id.phoneCode2);
         SharedPreferences shared=getSharedPreferences("username",MODE_PRIVATE);
         SharedPreferences.Editor editor = shared.edit();
+        phoneCodeList=getResources().getStringArray(R.array.numberCode).clone();
         if(accUser!=null) {
             editor.putString("username", accUser);
             editor.apply();
@@ -67,12 +71,67 @@ public class GetInEdit extends AppCompatActivity {
             shared=getSharedPreferences("username",MODE_PRIVATE);
             accUser=shared.getString("username","");
         }
-        if(username!=null&&password!=null&&secPhone!=null&&website!=null&&accUser!=null){
+        if(username!=null&&password!=null&&secPhone!=null&&website!=null&&accUser!=null&&otherInfo!=null){
             userET.setText(username);
             passET.setText(password);
+            if(!secPhone.equals("empty3")){
+                phoneSW.setChecked(true);
+                infoSec.setVisibility(View.VISIBLE);
+                secET.setVisibility(View.VISIBLE);
+                phoneCode.setVisibility(View.VISIBLE);
+                String phoneTmp=secPhone.substring(secPhone.indexOf(" ")+1,secPhone.length());
+                secET.setText(phoneTmp);
+                String codeTmp=secPhone.substring(0,secPhone.indexOf(" "));
+                for(int i=0;i<3;i++){
+                    if(phoneCodeList[i].equals(codeTmp)){
+                        phoneCode.setSelection(i);
+                    }
+                }
+            }else{
+                phoneSW.setChecked(false);
+                infoSec.setVisibility(View.GONE);
+                secET.setVisibility(View.GONE);
+                phoneCode.setVisibility(View.GONE);
+                secET.setText("");
+            }
+            if(!otherInfo.equals("empty3")){
+                otherSW.setChecked(true);
+                otherET.setText(otherInfo);
+                otherET.setVisibility(View.VISIBLE);
+            }else{
+                otherSW.setChecked(false);
+                otherET.setVisibility(View.GONE);
+                otherET.setText("");
+            }
         }
+        phoneSW.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(!isChecked){
+                    phoneSelect[0]="empty3";
+                    infoSec.setVisibility(View.GONE);
+                    secET.setVisibility(View.GONE);
+                    phoneCode.setVisibility(View.GONE);
+                }else{
+                    infoSec.setVisibility(View.VISIBLE);
+                    secET.setVisibility(View.VISIBLE);
+                    phoneCode.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        otherSW.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(!isChecked){
+                    otherSelect[0]="empty3";
+                    otherET.setVisibility(View.GONE);
+                }else{
+                    otherET.setVisibility(View.VISIBLE);
+                }
+            }
+        });
         list=getResources().getStringArray(R.array.website).clone();
-        phoneCodeList=getResources().getStringArray(R.array.numberCode).clone();
+
         webCode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -132,6 +191,11 @@ public class GetInEdit extends AppCompatActivity {
                                 }
                             }
                         });
+                        if(secET.getText().toString().equals("")){
+                            phoneSelect[0]="empty3";
+                        }else {
+                            phoneSelect[0] = phoneCodeList[position] + " " + secET.getText().toString();
+                        }
                     }
 
                     @Override
@@ -159,6 +223,11 @@ public class GetInEdit extends AppCompatActivity {
                         }
                     }
                 });
+        if(otherET.getText().toString().equals("")){
+            otherSelect[0]="empty3";
+        }else {
+            otherSelect[0] = otherET.getText().toString();
+        }
         if(addBtn2!=null){
             String finalAccUser = accUser;
             addBtn2.setOnClickListener(click->{
@@ -181,10 +250,12 @@ public class GetInEdit extends AppCompatActivity {
                                     }*/
                                     opener.add(userET.getText().toString(),passET.getText().toString(),phoneSelect[0],websiteSelect[0],finalAccUser,otherSelect[0]);
 
-                                    //go.putExtra("accUser", finalAccUser);
+                                    go.putExtra("accUser", finalAccUser);
                                     //go.putExtra("accPass",accPass);
                                     //startActivityForResult(go,30);
+
                                     startActivity(go);
+                                    checkFlag=true;
                                     finish();
                                 }
                             }).setNegativeButton(getResources().getText(R.string.noBtn), new DialogInterface.OnClickListener() {
@@ -253,9 +324,24 @@ public class GetInEdit extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event){
         if(keyCode == KeyEvent.KEYCODE_BACK){
-            Intent intent=new Intent(this,StartPage.class);
-            startActivity(intent);
-            finish();
+            if(!checkFlag){
+                AlertDialog.Builder builder=new AlertDialog.Builder(this);
+                builder.setTitle(getResources().getString(R.string.info14)).setMessage(getResources().getString(R.string.warning1))
+                        .setPositiveButton(getResources().getString(R.string.yesBtn), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent=new Intent(GetInEdit.this,StartPage.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        }).setNegativeButton(getResources().getString(R.string.noBtn), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                }).create().show();
+            }
+
             return true;
         }
         return super.onKeyDown(keyCode, event);

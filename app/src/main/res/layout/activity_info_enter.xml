@@ -58,11 +58,32 @@
         android:id="@+id/webEnter"
         android:inputType="text"
         />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/phoneSW"
+            android:text="@string/phoneSW"
+            android:layout_weight="1"
+            android:checked="false"
+            />
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/otherSW"
+            android:text="@string/otherSW"
+            android:checked="false"
+            android:layout_weight="1"/>
+    </LinearLayout>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/securityPhone"
         android:textColor="@android:color/holo_orange_dark"
+        android:visibility="gone"
         android:textSize="15sp"
         android:id="@+id/secInfo"
         />
@@ -76,6 +97,7 @@
             android:entries="@array/numberCode"
             android:spinnerMode="dropdown"
             android:textAlignment="center"
+            android:visibility="gone"
             />
         <EditText
             android:layout_width="wrap_content"
@@ -83,14 +105,16 @@
             android:hint="@string/enterSecurity"
             android:id="@+id/phoneEnter"
             android:inputType="number"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:visibility="gone"/>
     </LinearLayout>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
         android:id="@+id/otherInfoEnter"
-        android:hint="@string/otherInfoHint"/>
+        android:hint="@string/otherInfoHint"
+        android:visibility="gone"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

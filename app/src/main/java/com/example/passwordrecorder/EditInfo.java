@@ -75,11 +75,13 @@ public class EditInfo extends AppCompatActivity {
                 String password=infoToEdit.getPassword();
                 String secPhone=infoToEdit.getSecPhone();
                 String webSite=infoToEdit.getWebsite();
+                String otherInfo=infoToEdit.getOtherInfo();
                 Intent intent=new Intent(this,GetInEdit.class);
                 intent.putExtra("username",username);
                 intent.putExtra("password",password);
                 intent.putExtra("secPhone",secPhone);
                 intent.putExtra("webSite",webSite);
+                intent.putExtra("otherInfo",otherInfo);
                 intent.putExtra("accUser", finalAccUser);
                 opener.delete(infoToEdit);
                 infoList.remove(pos);

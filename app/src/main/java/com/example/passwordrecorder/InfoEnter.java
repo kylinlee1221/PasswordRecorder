@@ -24,6 +24,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -80,6 +81,35 @@ public class InfoEnter extends AppCompatActivity {
             shared=getSharedPreferences("username",MODE_PRIVATE);
             accUser=shared.getString("username","");
         }
+        Switch phoneSW,otherSW;
+        phoneSW=findViewById(R.id.phoneSW);
+        otherSW=findViewById(R.id.otherSW);
+        phoneSW.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(!isChecked){
+                    phoneSelect[0]="empty3";
+                    infoSec.setVisibility(View.GONE);
+                    securityET.setVisibility(View.GONE);
+                    phoneCode.setVisibility(View.GONE);
+                }else{
+                    infoSec.setVisibility(View.VISIBLE);
+                    securityET.setVisibility(View.VISIBLE);
+                    phoneCode.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        otherSW.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(!isChecked){
+                    otherSelect[0]="empty3";
+                    otherET.setVisibility(View.GONE);
+                }else{
+                    otherET.setVisibility(View.VISIBLE);
+                }
+            }
+        });
         list=getResources().getStringArray(R.array.website).clone();
         phoneCodeList=getResources().getStringArray(R.array.numberCode).clone();
         website.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -143,6 +173,11 @@ public class InfoEnter extends AppCompatActivity {
                         }
                     }
                 });
+                if(securityET.getText().toString().equals("")){
+                    phoneSelect[0]="empty3";
+                }else {
+                    phoneSelect[0] = phoneCodeList[position] + " " + securityET.getText().toString();
+                }
             }
 
             @Override
@@ -171,7 +206,11 @@ public class InfoEnter extends AppCompatActivity {
                 }
             }
         });
-        //if(!)
+        if(otherET.getText().toString().equals("")){
+            otherSelect[0]="empty3";
+        }else {
+            otherSelect[0] = otherET.getText().toString();
+        }
         if(addBtn!=null){
             String finalAccUser = accUser;
             //String finalAccUser1 = accUser;

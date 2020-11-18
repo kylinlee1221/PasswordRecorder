@@ -29,6 +29,8 @@
     <string name="searchHint">在此输入</string>
     <string name="passwordHint">密码必须为8–16位，含有字母数字或者(@!#)</string>
     <string name="rememberPassword">记住用户名密码</string>
+    <string name="phoneSW">注册手机</string>
+    <string name="otherSW">其他信息</string>
     <string name="error1">信息不能为空</string>
     <string name="error2">用户名已存在</string>
     <string name="error3">用户名或密码错误</string>
@@ -55,7 +57,9 @@
     <string name="info11">恢复成功，去登录</string>
     <string name="info12">长按信息来删除</string>
     <string name="info13">发现备份！备份时间为: </string>
+    <string name="info14">你没有保存，确定返回？</string>
     <string name="exit1">再按一次退出</string>
+    <string name="warning1">选是将丢失信息</string>
     <string name="infoUser">用户名:</string>
     <string name="infoPwd">密码:</string>
     <string name="infoWeb">注册地:</string>

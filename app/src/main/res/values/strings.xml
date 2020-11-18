@@ -28,6 +28,8 @@
     <string name="searchHint">Input here</string>
     <string name="passwordHint">Password must between 8–16 length, type in(eg.abcd,1234,#@!)</string>
     <string name="rememberPassword">Remember username,password</string>
+    <string name="phoneSW">Phone number</string>
+    <string name="otherSW">other info</string>
     <string name="error1">Please enter info</string>
     <string name="error2">Exist username, change it.</string>
     <string name="error3">Wrong info</string>
@@ -54,7 +56,9 @@
     <string name="info11">Restore completed,Go to login</string>
     <string name="info12">Long click info to delete it</string>
     <string name="info13">Backup founded! It modified in: </string>
+    <string name="info14">You did not save info, return?</string>
     <string name="exit1">Press another back to exit</string>
+    <string name="warning1">Yes will lose this info</string>
     <string name="infoUser">Username:</string>
     <string name="infoPwd">Password:</string>
     <string name="infoWeb">Website:</string>
