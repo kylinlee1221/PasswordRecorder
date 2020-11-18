@@ -57,6 +57,7 @@
     <string name="info12">Long click info to delete it</string>
     <string name="info13">Backup founded! It modified in: </string>
     <string name="info14">You did not save info, return?</string>
+    <string name="info15">Find language changed, restart application</string>
     <string name="exit1">Press another back to exit</string>
     <string name="warning1">Yes will lose this info</string>
     <string name="infoUser">Username:</string>

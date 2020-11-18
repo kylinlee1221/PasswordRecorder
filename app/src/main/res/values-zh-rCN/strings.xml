@@ -58,6 +58,7 @@
     <string name="info12">长按信息来删除</string>
     <string name="info13">发现备份！备份时间为: </string>
     <string name="info14">你没有保存，确定返回？</string>
+    <string name="info15">系统语言更改，应用自动重启</string>
     <string name="exit1">再按一次退出</string>
     <string name="warning1">选是将丢失信息</string>
     <string name="infoUser">用户名:</string>

@@ -41,6 +41,7 @@ public class InfoEnter extends AppCompatActivity {
 
     String[] list;
     String[] phoneCodeList;
+    Boolean checkFlag=false;
     //ArrayAdapter<String> adapter;
     //private List<String> list;
     @SuppressLint("ClickableViewAccessibility")
@@ -227,6 +228,7 @@ public class InfoEnter extends AppCompatActivity {
 
                                     Intent go=new Intent(InfoEnter.this,Info.class);
                                     opener.add(usernameET.getText().toString(),passwordET.getText().toString(),phoneSelect[0],websiteSelect[0],finalAccUser,otherSelect[0]);
+                                    checkFlag=true;
                                     startActivity(go);
                                     finish();
                                 }
@@ -282,9 +284,23 @@ public class InfoEnter extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event){
         if(keyCode == KeyEvent.KEYCODE_BACK){
-            Intent intent=new Intent(InfoEnter.this,StartPage.class);
-            startActivity(intent);
-            finish();
+            if(!checkFlag){
+                AlertDialog.Builder builder=new AlertDialog.Builder(this);
+                builder.setTitle(getResources().getString(R.string.info14)).setMessage(getResources().getString(R.string.warning1))
+                        .setPositiveButton(getResources().getString(R.string.yesBtn), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent=new Intent(InfoEnter.this,StartPage.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        }).setNegativeButton(getResources().getString(R.string.noBtn), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                }).create().show();
+            }
             return true;
         }
         return super.onKeyDown(keyCode, event);

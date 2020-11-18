@@ -99,6 +99,11 @@ public class UserDBOpener extends SQLiteOpenHelper {
         }
         return list;
     }
+    public void changeLanguage(String webSite,String oldWebSite){
+        if(webSite!=null&&oldWebSite!=null){
+            db.execSQL("update InfoTable set website = ? where website = ?",new String[]{webSite,oldWebSite});
+        }
+    }
     public ArrayList<AllInfo> getAllData(){
         ArrayList<AllInfo> list=new ArrayList<AllInfo>();
         if(db!=null){

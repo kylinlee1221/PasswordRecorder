@@ -33,7 +33,8 @@
         <activity android:name=".Register" />
         <activity android:name=".Info" />
         <activity android:name=".InfoEnter" />
-        <activity android:name=".StartPage" />
+        <activity android:name=".StartPage" android:configChanges="locale|layoutDirection"
+            android:exported="true"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

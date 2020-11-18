@@ -1,19 +1,28 @@
 package com.example.passwordrecorder;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Locale;
 
 public class StartPage extends AppCompatActivity {
 
@@ -45,6 +54,15 @@ public class StartPage extends AppCompatActivity {
             showUser.setText(getResources().getString(R.string.info1) + " " + userFrom);
             showUser.setTextColor(Color.RED);
         }
+        /*Locale locale=getResources().getConfiguration().locale;
+        String lang=locale.getLanguage();
+            new Thread(){
+                @Override
+                public void run(){
+                    super.run();
+                    Boolean flag=changeLanguage(lang);
+                }
+            }.run();*/
         Button add,show,logout,search;
         add=(Button) findViewById(R.id.addPassword);
         show=(Button)findViewById(R.id.checkInfo);
@@ -99,6 +117,80 @@ public class StartPage extends AppCompatActivity {
                 finish();
             });
         }
+    }
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        Locale locale=newConfig.locale;
+        String lang=locale.getLanguage();
+        final Boolean[] flag = new Boolean[1];
+        new Thread(){
+            @Override
+            public void run(){
+                super.run();
+                flag[0] =changeLanguage(lang);
+            }
+        }.run();
+        if(flag[0]){
+            AlertDialog.Builder builder=new AlertDialog.Builder(this);
+            builder.setTitle(getResources().getString(R.string.info15)+"?")
+                    .setPositiveButton(getResources().getString(R.string.yesBtn), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            restartApplication(StartPage.this);
+                        }
+                    }).create().show();
+
+        }
+    }
+    public void restartApplication(Context context) {
+        final Intent intent = context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        Toast.makeText(this,getResources().getString(R.string.info15),Toast.LENGTH_LONG).show();
+        startActivity(intent);
+
+        android.os.Process.killProcess(android.os.Process.myPid());
+    }
+    public boolean changeLanguage(String lang){
+        ProgressBar pb=findViewById(R.id.dbProgress);
+        UserDBOpener opener=new UserDBOpener(this);
+        if(lang.equals("zh")){
+            ArrayList<AllInfo> all=opener.getAllData();
+            pb.setVisibility(View.VISIBLE);
+            pb.setProgress(10);
+            for(int i=0;i<all.size();i++){
+                if(all.get(i).getWebsite().contains("other")){
+                    String changeWeb=all.get(i).getWebsite().substring(all.get(i).getWebsite().indexOf(":")+1);
+                    changeWeb="其它:"+changeWeb;
+                    Log.i("changedWeb",changeWeb);
+                    opener.changeLanguage(changeWeb,all.get(i).getWebsite());
+                    if(10+i<=100) {
+                        pb.setProgress(10 + i);
+                    }else{
+                        pb.setProgress(100-(10+i));
+                    }
+                }
+            }
+        }else{
+            ArrayList<AllInfo> all=opener.getAllData();
+            pb.setVisibility(View.VISIBLE);
+            pb.setProgress(10);
+            for(int i=0;i<all.size();i++) {
+                if (all.get(i).getWebsite().contains("其它")) {
+                    String changeWeb = all.get(i).getWebsite().substring(all.get(i).getWebsite().indexOf(":") + 1);
+                    changeWeb = "other:" + changeWeb;
+                    Log.i("changedWeb", changeWeb);
+                    opener.changeLanguage(changeWeb, all.get(i).getWebsite());
+                    if (10 + i <= 100) {
+                        pb.setProgress(10 + i);
+                    } else {
+                        pb.setProgress(100 - (10 + i));
+                    }
+                }
+            }
+        }
+        pb.setVisibility(View.GONE);
+        return true;
     }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event){
