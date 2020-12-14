@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                         editor.putString("username",userEdit.getText().toString());
                         editor.putString("password",passEdit.getText().toString());
                         editor.putBoolean("check",true);
-                        editor.commit();
+                        editor.apply();
                         Intent intent = new Intent(this, StartPage.class);
                         intent.putExtra("typeUsername", userEdit.getText().toString());
                         intent.putExtra("typePassword", passEdit.getText().toString());
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                         editor.putString("username","");
                         editor.putString("password","");
                         editor.putBoolean("check",false);
-                        editor.commit();
+                        editor.apply();
                         Intent intent = new Intent(this, StartPage.class);
                         intent.putExtra("typeUsername", userEdit.getText().toString());
                         intent.putExtra("typePassword", passEdit.getText().toString());

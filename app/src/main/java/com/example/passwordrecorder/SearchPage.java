@@ -201,6 +201,10 @@ public class SearchPage extends AppCompatActivity {
             }
         });
         search.setOnClickListener(click->{
+            infoList.clear();
+            adapter=new MyAdapter();
+            searchList.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
             //Log.e("searchby", String.valueOf(selectedSearch[0]));
             if(selectedSearch[0]==1){
                 infoList.clear();
@@ -208,7 +212,7 @@ public class SearchPage extends AppCompatActivity {
                 if(infoList.size()!=0) {
                     adapter = new MyAdapter();
                     searchList.setAdapter(adapter);
-                    searchList.setSelection(adapter.getCount() - 1);
+                    //searchList.setSelection(adapter.getCount() - 1);
                     adapter.notifyDataSetChanged();
                 }else{
                     Toast.makeText(SearchPage.this,getResources().getString(R.string.error4),Toast.LENGTH_LONG).show();
@@ -220,7 +224,7 @@ public class SearchPage extends AppCompatActivity {
                     if(infoList.size()!=0){
                         adapter=new MyAdapter();
                         searchList.setAdapter(adapter);
-                        searchList.setSelection(adapter.getCount()-1);
+                        //searchList.setSelection(adapter.getCount()-1);
                         adapter.notifyDataSetChanged();
                     }else{
                         Toast.makeText(SearchPage.this,getResources().getString(R.string.error4),Toast.LENGTH_LONG).show();
@@ -239,7 +243,7 @@ public class SearchPage extends AppCompatActivity {
                     if(infoList.size()!=0){
                         adapter=new MyAdapter();
                         searchList.setAdapter(adapter);
-                        searchList.setSelection(adapter.getCount()-1);
+                        //searchList.setSelection(adapter.getCount()-1);
                         adapter.notifyDataSetChanged();
                     }else{
                         Toast.makeText(SearchPage.this,getResources().getString(R.string.error4),Toast.LENGTH_LONG).show();

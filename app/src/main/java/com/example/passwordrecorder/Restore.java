@@ -58,7 +58,7 @@ public class Restore extends AppCompatActivity {
             restoreHint.setText(R.string.error8);
             Toast.makeText(this,getResources().getString(R.string.error8),Toast.LENGTH_LONG).show();
         }else{
-            String time=new SimpleDateFormat("yyyy-MM-dd").format(new Date(xlsFile.lastModified()));
+            String time=new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date(xlsFile.lastModified()));
             restore.setVisibility(View.VISIBLE);
             //restoreHint.setText(R.string.restoreHint);
             restoreHint.setTextColor(Color.GREEN);

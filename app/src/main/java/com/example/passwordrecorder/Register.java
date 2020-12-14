@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -52,9 +53,11 @@ public class Register extends AppCompatActivity {
         registerBtn.setOnClickListener(click->{
             if(!accountReg.getText().toString().equals("")&&!passwordReg.getText().toString().equals("")){
                 ArrayList<Account> data=opener.getAllData();
+                //Log.e("accountlistsize",String.valueOf(data.size()));
                 boolean match=false;
                 for(int i=0;i<data.size();i++){
                     Account account=data.get(i);
+                    //Log.e("Account name",account.getName());
                     if(accountReg.getText().toString().equals(account.getName())){
                         match=true;
                         break;

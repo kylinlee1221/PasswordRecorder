@@ -64,7 +64,7 @@ public class Info extends AppCompatActivity {
                 hint.setTextColor(Color.BLACK);
                 adapter = new MyAdapter();
                 myList.setAdapter(adapter);
-                myList.setSelection(adapter.getCount() - 1);
+                //myList.setSelection(adapter.getCount() - 1);
                 adapter.notifyDataSetChanged();
             }else{
                 myList.setVisibility(View.GONE);

@@ -155,7 +155,7 @@ public class UserDBOpener extends SQLiteOpenHelper {
     public ArrayList<UserInfo> getUserDataByUser(String username,String accUser){
         ArrayList<UserInfo> list=new ArrayList<UserInfo>();
         if(db!=null){
-            Cursor cursor=db.rawQuery("select * from InfoTable where username = ? and accuser = ?",new String[]{username,accUser});
+            Cursor cursor=db.rawQuery("select * from InfoTable where username like ? and accuser = ?",new String[]{"%"+username+"%",accUser});
             if(cursor.moveToFirst()){
                 do{
                     if(cursor.getColumnIndex(COL_Website)!=-1&&cursor.getColumnIndex(COL_User)!=-1&&cursor.getColumnIndex(COL_ID)!=-1&&cursor.getColumnIndex(COL_Pass)!=-1&&cursor.getColumnIndex(COL_SEC)!=-1&&cursor.getColumnIndex(COL_OPEN_ACCOUNT)!=-1&&cursor.getColumnIndex(COL_OTHER_INFO)!=-1) {
@@ -180,7 +180,7 @@ public class UserDBOpener extends SQLiteOpenHelper {
     public ArrayList<UserInfo> getUserDataByPhone(String secPhone,String accUser){
         ArrayList<UserInfo> list=new ArrayList<UserInfo>();
         if(db!=null){
-            Cursor cursor=db.rawQuery("select * from InfoTable where securityPhone = ? and accuser = ?",new String[]{secPhone,accUser});
+            Cursor cursor=db.rawQuery("select * from InfoTable where securityPhone like ? and accuser = ?",new String[]{"%"+secPhone+"%",accUser});
             if(cursor.moveToFirst()){
                 do{
                     if(cursor.getColumnIndex(COL_Website)!=-1&&cursor.getColumnIndex(COL_User)!=-1&&cursor.getColumnIndex(COL_ID)!=-1&&cursor.getColumnIndex(COL_Pass)!=-1&&cursor.getColumnIndex(COL_SEC)!=-1&&cursor.getColumnIndex(COL_OPEN_ACCOUNT)!=-1&&cursor.getColumnIndex(COL_OTHER_INFO)!=-1) {

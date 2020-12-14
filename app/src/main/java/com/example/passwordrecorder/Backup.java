@@ -63,7 +63,7 @@ public class Backup extends AppCompatActivity {
         requestPermissions();
         File xlsFile=new File(Environment.getExternalStorageDirectory(),"InfoBackup.xls");
         if(xlsFile.exists()){
-            String time=new SimpleDateFormat("yyyy-MM-dd").format(new Date(xlsFile.lastModified()));
+            String time=new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date(xlsFile.lastModified()));
             fileTV.setText(getResources().getString(R.string.info7)+time);
         }else{
             fileTV.setText(getResources().getString(R.string.info8));
@@ -92,7 +92,7 @@ public class Backup extends AppCompatActivity {
                         if (flag) {
                             if (xlsFile.createNewFile()) {
                                 Toast.makeText(this, getResources().getString(R.string.success4) + xlsFile.getAbsolutePath(), Toast.LENGTH_LONG).show();
-                                String time=new SimpleDateFormat("yyyy-MM-dd").format(new Date(xlsFile.lastModified()));
+                                String time=new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date(xlsFile.lastModified()));
                                 fileTV.setText(getResources().getString(R.string.info7)+time);
                             }
                         }
