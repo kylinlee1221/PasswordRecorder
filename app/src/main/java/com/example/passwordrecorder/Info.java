@@ -98,8 +98,8 @@ public class Info extends AppCompatActivity {
                 AlertDialog.Builder builder=new AlertDialog.Builder(Info.this);
                 View view1=View.inflate(Info.this,R.layout.copydata,null);
                 TextView passInfo=view1.findViewById(R.id.passwordInfo),userInfo=view1.findViewById(R.id.usernameInfo),web=view1.findViewById(R.id.websiteInfo);
-                passInfo.setText(getResources().getString(R.string.username)+info.getPassword());
-                userInfo.setText(getResources().getString(R.string.password)+info.getUsername());
+                passInfo.setText(getResources().getString(R.string.password)+info.getPassword());
+                userInfo.setText(getResources().getString(R.string.username)+info.getUsername());
                 web.setText(getResources().getString(R.string.infoWeb)+info.getWebsite());
                 builder.setTitle(getResources().getString(R.string.userInfoHint)).setView(view1).setPositiveButton(getResources().getString(R.string.copyBtn),(click,arg)->{
                     ClipboardManager clipboardManager=(ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
