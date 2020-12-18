@@ -34,13 +34,17 @@ public class AboutPage extends AppCompatActivity {
             startActivity(goGit);
         });
         mail.setOnClickListener(click->{
-            String address="26882137@qq.com";
+            /*String address="26882137@qq.com";
             String subject="I found a bug in Password Recorder";
             String body="Here is the bug:";
             String content = "mailto:"+address+"?subject="+subject+"&body="+body;
             Intent returnIt = new Intent(Intent.ACTION_SENDTO);
             returnIt.setData(Uri.parse(content));
-            startActivity(Intent.createChooser(returnIt, "Send email tips"));
+            startActivity(Intent.createChooser(returnIt, "Send email tips"));*/
+            String bugUrl="https://github.com/kylinlee1221/PasswordRecorder/issues";
+            Uri chk=Uri.parse(bugUrl);
+            Intent goIssue=new Intent(Intent.ACTION_VIEW,chk);
+            startActivity(goIssue);
         });
     }
     @Override

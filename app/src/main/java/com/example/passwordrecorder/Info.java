@@ -3,7 +3,10 @@ package com.example.passwordrecorder;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -17,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -87,6 +91,25 @@ public class Info extends AppCompatActivity {
                 finish();
             });
         }
+        myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                UserInfo info=infoList.get(position);
+                AlertDialog.Builder builder=new AlertDialog.Builder(Info.this);
+                View view1=View.inflate(Info.this,R.layout.copydata,null);
+                TextView passInfo=view1.findViewById(R.id.passwordInfo),userInfo=view1.findViewById(R.id.usernameInfo),web=view1.findViewById(R.id.websiteInfo);
+                passInfo.setText(getResources().getString(R.string.username)+info.getPassword());
+                userInfo.setText(getResources().getString(R.string.password)+info.getUsername());
+                web.setText(getResources().getString(R.string.infoWeb)+info.getWebsite());
+                builder.setTitle(getResources().getString(R.string.userInfoHint)).setView(view1).setPositiveButton(getResources().getString(R.string.copyBtn),(click,arg)->{
+                    ClipboardManager clipboardManager=(ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData clipData=ClipData.newPlainText("label",userInfo.getText().toString()+"\n"+passInfo.getText().toString());
+                    clipboardManager.setPrimaryClip(clipData);
+                }).setNegativeButton(getResources().getString(R.string.noBtn),(click,arg)->{
+
+                }).create().show();
+            }
+        });
         myList.setOnItemLongClickListener((p,b,pos,id)->{
             AlertDialog.Builder builder=new AlertDialog.Builder(this);
             UserInfo info1=infoList.get(pos);

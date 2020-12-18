@@ -54,7 +54,7 @@
     <string name="info9">You have: </string>
     <string name="info10">info in db</string>
     <string name="info11">Restore completed,Go to login</string>
-    <string name="info12">Long click info to delete it</string>
+    <string name="info12">Short click to view and copy,Long click info to delete it</string>
     <string name="info13">Backup founded! It modified in: </string>
     <string name="info14">You did not save info, return?</string>
     <string name="info15">Find language changed, restart application</string>
@@ -68,17 +68,19 @@
     <string name="yesBtn">Yes</string>
     <string name="noBtn">no</string>
     <string name="sureBtn">confirm</string>
+    <string name="copyBtn">Copy username and password data to clipboard</string>
     <string name="BackToFront">Click here back to front</string>
     <string name="back">Back to login</string>
     <string name="returnToLogin">Click here to logout</string>
     <string name="findPass">Forget password</string>
     <string name="aboutUs">about</string>
-    <string name="popAbout">This program is designed by Kylinlee\u00A9 \n And it\'s 100% openSource and free \n You can check the code by click the button to github\n Or report bug by send e-mail to\n 26882137@qq.com</string>
+    <string name="popAbout">This program is designed by Kylinlee\u00A9 \n And it\'s 100% openSource and free \n You can check the code by click the button to github\n Or report bug by add an issue on Git</string>
     <string name="secCode">Safety Code:</string>
     <string name="secCodeHint">Enter safety code here</string>
     <string name="secSwitch">Account need Security phone</string>
     <string name="otherInfoSwitch">Account need other info</string>
     <string name="otherInfoHint">Place other info here</string>
+    <string name="userInfoHint">Here is user info and data</string>
     <string-array name="website">
         <item>Google</item>
         <item>Facebook</item>
